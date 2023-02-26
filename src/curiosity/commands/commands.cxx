@@ -52,7 +52,7 @@ void simular(std::string type, std::string magnitude, std::string measurement_un
     if (type == "avanzar") {
         if (is_positive(magnitude)) {
             if (measurement_unit == "cm") {
-                magnitude = m*0.1;
+                m = m*0.1;
                 curiosity.move(m);
             } else if (measurement_unit == "m") {
                 curiosity.move(m);

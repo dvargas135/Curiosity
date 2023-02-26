@@ -1,0 +1,3 @@
+avanzar 10 cm 
+girar 90 g 
+avanzar 1 m 

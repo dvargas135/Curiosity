@@ -5,11 +5,13 @@
 #include <string>
 #include <vector>
 
-#include "curiosity/commands/commands.h"
-//#include "vector/vector.h"
 #include "curiosity/curiosity.h"
+#include "curiosity/commands/commands.h"
+#include "curiosity/commands/cargar.h"
+#include "curiosity/commands/agregar.h"
+#include "curiosity/commands/ayuda.h"
+#include "curiosity/commands/guardar.h"
 
-//Vector position(0.0, 0.0);
 Robot curiosity(0.0, 0.0, 0.0);
 
 void init(Cmds&, Elmts&);
@@ -57,7 +59,8 @@ void init(Cmds& c, Elmts& e) {
         {"crear_mapa", 11},
         {"ruta_mas_larga", 12},
         {"ayuda", 13},
-        {"simular", 14}
+        {"simular", 14},
+        {"print", 15}
     };
 
     int args = seglist.size() - 1;
@@ -154,6 +157,9 @@ void init(Cmds& c, Elmts& e) {
             init(c, e);
         case 14:
             simular(*(it+1), *(it+2), *(it+3), c);
+            init(c, e);
+        case 15:
+            print(c);
             init(c, e);
         default:
             std::cout<<"Comando no encontrado! Intente nuevamente."<<std::endl;

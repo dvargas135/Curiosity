@@ -19,3 +19,12 @@ void Robot::turn(double degrees) {
 void Robot::printLocation() const {
     std::cout << "Posición del robot: (" << x_ << ", " << y_ << "). Dirección: " << direction_ << " grados." << std::endl;
 }
+
+void Robot::moveTo(double x, double y) {
+    double delta_x = x - x_;
+    double delta_y = y - y_;
+    double radians = atan2(delta_x, delta_y);
+    x_ += x;
+    y_ += y;
+    direction_ = radians * 180.0 / M_PI;
+}

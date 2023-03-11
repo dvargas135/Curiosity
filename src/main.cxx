@@ -4,47 +4,18 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <cstdio>
 
-#include "curiosity/curiosity.h"
-#include "curiosity/commands/commands.h"
-#include "curiosity/commands/cargar.h"
-#include "curiosity/commands/agregar.h"
-#include "curiosity/commands/ayuda.h"
-#include "curiosity/commands/guardar.h"
-
-Robot curiosity(0.0, 0.0, 0.0);
-
-void init(Cmds&, Elmts&);
+#include "command.h"
+#include "system.h"
+#include "ayuda.h"
+#include "cargar.h"
+#include "agregar.h"
+#include "guardar.h"
+#include "simular_comandos.h"
 
 int main() {
-    Cmds c;
-    Elmts e;
-    init(c, e);
-    
-    return 0;
-}
-
-void init(Cmds& c, Elmts& e) {
-    std::string cmd;
-    std::cout<<"$ ";
-    getline(std::cin,cmd);
-
-    if (cmd.empty()) {
-        std::cout<<"Comando no encontrado! Intente nuevamente."<<std::endl;
-        init(c, e);
-    }
-
-    std::stringstream sstream(cmd);
-    std::string s;
-    std::vector<std::string> seglist;
-        
-    while (std::getline(sstream, s, ' ')) {
-        seglist.push_back(s);
-    }
-
-    std::vector<std::string>::iterator it;
-    it = seglist.begin();
-    
+    System sys;
     std::map<std::string, int> cmd_map {
         {"cargar_comandos", 1},
         {"cargar_elementos", 2},
@@ -59,122 +30,126 @@ void init(Cmds& c, Elmts& e) {
         {"crear_mapa", 11},
         {"ruta_mas_larga", 12},
         {"ayuda", 13},
-        {"simular", 14},
-        {"print", 15}
     };
 
-    int args = seglist.size() - 1;
+    std::string cmd;
 
-    switch (cmd_map[*(it+0)]) {
-        case 1: {
-            if (args != 1) {
-                ayuda(cmd_map, *(it+0));
-                init(c, e);
-            }
-            cargar_comandos(*(it+1), c);
-            init(c, e);
+    do {
+        printf("$ ");
+        getline(std::cin, cmd);
+
+        if (cmd.empty()) {
+            printf("Comando no encontrado! Intente nuevamente.\n");
+            break;
         }
+
+        std::stringstream sstream(cmd);
+        std::string s;
+        std::vector<std::string> seglist;
             
-        case 2:
-            if (args != 1) {
-                ayuda(cmd_map, *(it+0));
-                init(c, e);
-            }
-            cargar_elementos(*(it+1), e);
-            init(c, e);
-        case 3:
-            if (args != 3) {
-                ayuda(cmd_map, *(it+0));
-                init(c, e);
-            }
-            agregar_movimiento(*(it+1), *(it+2), *(it+3), c);
-            init(c, e);
-        case 4:
-            if (args != 3) {
-                ayuda(cmd_map, *(it+0));
-                init(c, e);
-            }
-            agregar_analisis(*(it+1), *(it+2), *(it+3), c);
-            init(c, e);
-        case 5:
-            if (args != 5) {
-                ayuda(cmd_map, *(it+0));
-                init(c, e);
-            }
-            agregar_elemento(*(it+1), *(it+2), *(it+3), *(it+4), *(it+5), e);
-            init(c, e);
-        case 6:
-            if (args != 2) {
-                ayuda(cmd_map, *(it+0));
-                init(c, e);
-            }
-            guardar(*(it+1), *(it+2), c, e);
-            init(c, e);
-        case 7:
-            if (args != 2) {
-                ayuda(cmd_map, *(it+0));
-                init(c, e);
-            }
-            simular_comandos(*(it+1), *(it+2));
-            init(c, e);
-        case 8:
-            std::cout<<"\n\nTerminando proceso..."<<std::endl;
-            return;
-        case 9:
-            if (args != 0) {
-                ayuda(cmd_map, *(it+0));
-                init(c, e);
-            }
-            ubicar_elementos();
-            init(c, e);
-        case 10:
-            if (args != 4) {
-                ayuda(cmd_map, *(it+0));
-                init(c, e);
-            }
-            en_cuadrante(*(it+1), *(it+2), *(it+3), *(it+4));
-            init(c, e);
-        case 11:
-            if (args != 1) {
-                ayuda(cmd_map, *(it+0));
-                init(c, e);
-            }
-            crear_mapa(*(it+1));
-            init(c, e);
-        case 12:
-            if (args != 0) {
-                ayuda(cmd_map, *(it+0));
-                init(c, e);
-            }
-            ruta_mas_larga();
-            init(c, e);
-        case 13:
-            if (args != 1) {
-                ayuda(cmd_map, *(it+0));
-                init(c, e);
-            }
-            ayuda(cmd_map, *(it+1));
-            init(c, e);
-        case 14:
-            simular(*(it+1), *(it+2), *(it+3), c);
-            init(c, e);
-        case 15:
-            print(c);
-            init(c, e);
-        default:
-            std::cout<<"Comando no encontrado! Intente nuevamente."<<std::endl;
-            init(c, e);
-    }
-    /*
-    while(true) {
-        std::vector<std::string> cmds = {"cargar_comandos", "cargar_elementos", "agregar_movimiento", "agregar_analisis", "agregar_elemento", "guardar", "simular_comandos", "salir", "ubicar_elementos", "en_cuadrante", "crear_mapa", "ruta_mas_larga"};
+        while (std::getline(sstream, s, ' ')) {
+            seglist.push_back(s);
+        }
 
         std::vector<std::string>::iterator it;
         it = seglist.begin();
-        if (*(it+0) == "ayuda") {
-            if (seglist.size()==1) {
-                std::cout<<"Uso: ayuda <comando> \n\nLista comandos: cargar_comandos, cargar_elementos, agregar_movimiento, agregar_analisis, agregar_elemento, guardar, simular_comandos, salir, ubicar_elementos, en_cuadrante, crear_mapa, ruta_mas_larga"<<std::endl;
+
+        size_t args = seglist.size() - 1;
+
+        switch (cmd_map[*(it+0)]) {
+            case 1: {
+                if (args != 1) {
+                    ayuda(cmd_map, *(it+0));
+                    break;
+                }
+                cargar_comandos(*(it+1), sys);
+                break;
+            }
+            case 2:
+                if (args != 1) {
+                    ayuda(cmd_map, *(it+0));
+                    break;
+                }
+                cargar_elementos(*(it+1), sys);
+                break;
+            case 3:
+                if (args != 3) {
+                    ayuda(cmd_map, *(it+0));
+                    break;
+                }
+                agregar_movimiento(*(it+1), *(it+2), *(it+3), sys);
+                break;
+            case 4:
+                if (args != 3) {
+                    ayuda(cmd_map, *(it+0));
+                    break;
+                }
+                agregar_analisis(*(it+1), *(it+2), *(it+3), sys);
+                break;
+            case 5:
+                if (args != 5) {
+                    ayuda(cmd_map, *(it+0));
+                    break;
+                }
+                agregar_elemento(*(it+1), *(it+2), *(it+3), *(it+4), *(it+5), sys);
+                break;
+            case 6:
+                if (args != 2) {
+                    ayuda(cmd_map, *(it+0));
+                    break;
+                }
+                guardar(*(it+1), *(it+2), sys);
+                break;
+            case 7:
+                if (args != 3) {
+                    ayuda(cmd_map, *(it+0));
+                    break;
+                }
+                simular_comandos(*(it+1), *(it+2), *(it+3), sys);
+                break;
+            case 8:
+                printf("\n\nTerminando proceso...\n");
+                return 0;
+            case 9:
+                if (args != 0) {
+                    ayuda(cmd_map, *(it+0));
+                    break;
+                }
+                //ubicar_elementos();
+                break;
+            case 10:
+                if (args != 4) {
+                    ayuda(cmd_map, *(it+0));
+                    break;
+                }
+                //en_cuadrante(*(it+1), *(it+2), *(it+3), *(it+4));
+                break;
+            case 11:
+                if (args != 1) {
+                    ayuda(cmd_map, *(it+0));
+                    break;
+                }
+                //crear_mapa(*(it+1));
+                break;
+            case 12:
+                if (args != 0) {
+                    ayuda(cmd_map, *(it+0));
+                    break;
+                }
+                //ruta_mas_larga();
+                break;
+            case 13:
+                if (args != 1) {
+                    ayuda(cmd_map, *(it+0));
+                    break;
+                }
+                ayuda(cmd_map, *(it+1));
+                break;
+            default:
+                printf("Comando no encontrado! Intente nuevamente.\n");
+                break;
         }
-    }
-    */
+    } while (true);
+    
+    return 0;
 }

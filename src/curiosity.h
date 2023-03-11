@@ -1,12 +1,14 @@
 #ifndef CURIOSITY_H
 #define CURIOSITY_H
 
-class Robot {
+#include "command.h"
+
+class Curiosity {
     public:
-        Robot(double x, double y, double direction);
+        Curiosity(double x, double y, double direction);
         void move(double distance);
         void turn(double degrees);
-        void printLocation() const;
+        std::string getLocation() const;
         void moveTo(double x, double y);
     private:
         double x_;

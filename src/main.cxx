@@ -6,13 +6,13 @@
 #include <vector>
 #include <cstdio>
 
-#include "command.h"
-#include "system.h"
-#include "ayuda.h"
-#include "cargar.h"
-#include "agregar.h"
-#include "guardar.h"
-#include "simular_comandos.h"
+#include "command.hpp"
+#include "system.hpp"
+#include "ayuda.hpp"
+#include "cargar.hpp"
+#include "agregar.hpp"
+#include "guardar.hpp"
+#include "simular_comandos.hpp"
 
 int main() {
     System sys;

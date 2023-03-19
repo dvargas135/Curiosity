@@ -1,7 +1,7 @@
 #ifndef CURIOSITY_H
 #define CURIOSITY_H
 
-#include "command.h"
+#include "command.hpp"
 
 class Curiosity {
     public:

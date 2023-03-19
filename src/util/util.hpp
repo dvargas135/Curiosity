@@ -1,5 +1,5 @@
-#ifndef UTIL_G
-#define UTIL_G
+#ifndef UTIL_H
+#define UTIL_H
 
 #include <fstream>
 #include <string>

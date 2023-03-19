@@ -1,7 +1,7 @@
-#include "agregar.h"
-#include "util.h"
-#include "command.h"
-#include "element.h"
+#include "agregar.hpp"
+#include "../util/util.hpp"
+#include "../classes/command.hpp"
+#include "../classes/element.hpp"
 
 #include <string>
 #include <cstdio>

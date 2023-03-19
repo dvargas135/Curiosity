@@ -1,7 +1,6 @@
-#include "simular_comandos.h"
-#include "curiosity.h"
-//#include "system.h"
-#include "command.h"
+#include "simular_comandos.hpp"
+#include "../classes/curiosity.hpp"
+#include "../classes/command.hpp"
 
 #include <string>
 #include <cstdio>

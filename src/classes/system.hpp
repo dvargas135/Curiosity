@@ -1,8 +1,8 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
-#include "command.h"
-#include "element.h"
+#include "command.hpp"
+#include "element.hpp"
 #include <queue>
 
 class System {

@@ -1,4 +1,4 @@
-#include "ayuda.h"
+#include "ayuda.hpp"
 
 #include <iostream>
 #include <map>

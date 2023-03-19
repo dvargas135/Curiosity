@@ -1,6 +1,6 @@
 OBJS	= main.o command.o curiosity.o system.o util.o cargar.o ayuda.o agregar.o element.o guardar.o simular_comandos.o
-SOURCE	= main.cxx command.cxx curiosity.cxx system.cxx util.cxx cargar.cxx ayuda.cxx agregar.cxx element.cxx guardar.cxx simular_comandos.cxx
-HEADER	= command.h curiosity.h system.h util.h cargar.h ayuda.h agregar.h element.h guardar.h simular_comandos.h
+SOURCE	= main.cxx classes/command.cxx classes/curiosity.cxx classes/system.cxx util/util.cxx commands/cargar.cxx commands/ayuda.cxx commands/agregar.cxx classes/element.cxx commands/guardar.cxx commands/simular_comandos.cxx
+HEADER	=       classes/command.hpp classes/curiosity.hpp classes/system.hpp util/util.hpp commands/cargar.hpp commands/ayuda.hpp commands/agregar.hpp classes/element.hpp commands/guardar.hpp commands/simular_comandos.hpp
 OUT		= main
 CC		= g++
 FLAGS	= -std=c++11 -g -c -Wall
@@ -11,35 +11,35 @@ main: $(OBJS)
 main.o: main.cxx
 	$(CC) $(FLAGS) main.cxx 
 
-command.o: command.cxx
-	$(CC) $(FLAGS) command.cxx 
+command.o: classes/command.cxx
+	$(CC) $(FLAGS) classes/command.cxx 
 
-curiosity.o: curiosity.cxx
-	$(CC) $(FLAGS) curiosity.cxx 
+curiosity.o: classes/curiosity.cxx
+	$(CC) $(FLAGS) classes/curiosity.cxx 
 
-system.o: system.cxx
-	$(CC) $(FLAGS) system.cxx 
+system.o: classes/system.cxx
+	$(CC) $(FLAGS) classes/system.cxx 
 
-util.o: util.cxx
-	$(CC) $(FLAGS) util.cxx 
+util.o: util/util.cxx
+	$(CC) $(FLAGS) util/util.cxx 
 
-cargar.o: cargar.cxx
-	$(CC) $(FLAGS) cargar.cxx 
+cargar.o: commands/cargar.cxx
+	$(CC) $(FLAGS) commands/cargar.cxx 
 
-ayuda.o: ayuda.cxx
-	$(CC) $(FLAGS) ayuda.cxx 
+ayuda.o: commands/ayuda.cxx
+	$(CC) $(FLAGS) commands/ayuda.cxx 
 
-agregar.o: agregar.cxx
-	$(CC) $(FLAGS) agregar.cxx 
+agregar.o: commands/agregar.cxx
+	$(CC) $(FLAGS) commands/agregar.cxx 
 
-element.o: element.cxx
-	$(CC) $(FLAGS) element.cxx 
+element.o: classes/element.cxx
+	$(CC) $(FLAGS) classes/element.cxx 
 
-guardar.o: guardar.cxx
-	$(CC) $(FLAGS) guardar.cxx 
+guardar.o: commands/guardar.cxx
+	$(CC) $(FLAGS) commands/guardar.cxx 
 
-simular_comandos.o: simular_comandos.cxx
-	$(CC) $(FLAGS) simular_comandos.cxx 
+simular_comandos.o: commands/simular_comandos.cxx
+	$(CC) $(FLAGS) commands/simular_comandos.cxx 
 
 
 clean:

@@ -1,4 +1,4 @@
-#include "system.h"
+#include "system.hpp"
 #include <queue>
 
 void System::addCommand(Command* c) {

@@ -1,4 +1,4 @@
-#include "curiosity.h"
+#include "curiosity.hpp"
 #include <cmath>
 #include <iostream>
 

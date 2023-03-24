@@ -1,3 +1,4 @@
+#define _USE_MATH_DEFINES
 #include "curiosity.hpp"
 #include <cmath>
 #include <iostream>

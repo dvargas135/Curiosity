@@ -12,7 +12,7 @@
 
 void cargar_comandos(std::string filename, System& sys) {
     sys.clearCommands();
-    std::string filepath = "textfiles/commands/" + fileName;
+    std::string filepath = "textfiles/commands/" + filename;
     if (!file_exists(filepath)) {
         printf("%s no se encuentra o no puede leerse.\n", filename.c_str());
         return;

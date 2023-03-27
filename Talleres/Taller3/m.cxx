@@ -6,9 +6,184 @@
 #include <cstdio>
 #include <algorithm>
 
-#include "avltree.hpp"
-
 using namespace std;
+
+class Song {
+public:
+    string title;
+    string artist;
+    string album;
+    string genre;
+    Song() : title(""), artist(""), album(""), genre("") {}
+    Song(string t, string a, string al, string g) {
+        title = t;
+        artist = a;
+        album = al;
+        genre = g;
+    }
+};
+
+template<typename T>
+class Node {
+public:
+    T data;
+    int height;
+    string search_attr;
+    Node<T>* left;
+    Node<T>* right;
+
+    Node(T val, string attr) {
+        data = val;
+        height = 1;
+        left = right = nullptr;
+        search_attr = attr;
+    }
+};
+
+template<typename T>
+class AVLTree {
+private:
+    Node<T>* root;
+    int height(Node<T>* node) {
+        return node == nullptr ? 0 : node->height;
+    }
+    int balanceFactor(Node<T>* node) {
+        return height(node->left) - height(node->right);
+    }
+    void updateHeight(Node<T>* node) {
+        node->height = 1 + max(height(node->left), height(node->right));
+    }
+    Node<T>* rotateLeft(Node<T>* node) {
+        Node<T>* rightChild = node->right;
+        Node<T>* leftSubtree = rightChild->left;
+        rightChild->left = node;
+        node->right = leftSubtree;
+        updateHeight(node);
+        updateHeight(rightChild);
+        return rightChild;
+    }
+    Node<T>* rotateRight(Node<T>* node) {
+        Node<T>* leftChild = node->left;
+        Node<T>* rightSubtree = leftChild->right;
+        leftChild->right = node;
+        node->left = rightSubtree;
+        updateHeight(node);
+        updateHeight(leftChild);
+        return leftChild;
+    }
+    Node<T>* balance(Node<T>* node) {
+        updateHeight(node);
+        int bf = balanceFactor(node);
+        if (bf > 1 && balanceFactor(node->left) >= 0) {
+            return rotateRight(node);
+        }
+        if (bf < -1 && balanceFactor(node->right) <= 0) {
+            return rotateLeft(node);
+        }
+        if (bf > 1 && balanceFactor(node->left) < 0) {
+            node->left = rotateLeft(node->left);
+            return rotateRight(node);
+        }
+        if (bf < -1 && balanceFactor(node->right) > 0) {
+            node->right = rotateRight(node->right);
+            return rotateLeft(node);
+        }
+        return node;
+    }
+    Node<T>* insert(Node<T>* node, T val, string attr) {
+        if (node == nullptr) {
+            return new Node<T>(val, attr);
+        }
+        if (attr < node->search_attr) {
+            node->left = insert(node->left, val, attr);
+        } else {
+            node->right = insert(node->right, val, attr);
+        }
+        return balance(node);
+    }
+    Node<T>* findMin(Node<T>* node) {
+        while (node->left != nullptr) {
+            node = node->left;
+        }
+        return node;
+    }
+    Node<T>* remove(Node<T>* node, T val, string attr) {
+        if (node == nullptr) {
+            return node;
+        }
+        if (attr < node->search_attr) {
+            node->left = remove(node->left, val, attr);
+        } else if (attr > node->search_attr) {
+            node->right = remove(node->right, val, attr);
+        } else {
+            Node<T>* leftChild = node->left;
+            Node<T>* rightChild = node->right;
+            delete node;
+            if (rightChild == nullptr) {
+                return leftChild;
+            }
+            Node<T>* minNode = findMin(rightChild);
+            minNode->right = remove(rightChild, minNode->data, attr);
+            minNode->left = leftChild;
+            return balance(minNode);
+        }
+        return balance(node);
+    }
+    Node<T>* search(Node<T>* node, string attr) {
+        if (node == nullptr || node->search_attr == attr) {
+            return node;
+        }
+        if (attr < node->search_attr) {
+            return search(node->left, attr);
+        } else {
+            return search(node->right, attr);
+        }
+    }
+    vector<int> getBranchHeights() {
+        vector<int> branchHeights;
+        if (root) {
+            vector<Node<T>*> stack;
+            stack.push_back(root);
+            while (!stack.empty()) {
+                Node<T>* node = stack.back();
+                stack.pop_back();
+                if (!node->left && !node->right) {
+                    branchHeights.push_back(node->height);
+                } else {
+                    if (node->left) {
+                        stack.push_back(node->left);
+                    }
+                    if (node->right) {
+                        stack.push_back(node->right);
+                    }
+                }
+            }
+        }
+        return branchHeights;
+    }
+public:
+    AVLTree() {
+        root = nullptr;
+    }
+    vector<int> getHeights() {
+        return getBranchHeights();
+    }
+    Node<T>* getRoot() const {
+	    return root;
+    }
+    void add(T val, string attr) {
+        root = insert(root, val, attr);
+    }
+    void remove(T val, string attr) {
+        root = remove(root, val, attr);
+    }
+    Node<T>* find(string title) {
+        return search(root, title);
+    }
+    Song nodeToSong(Node<Song>* node) {
+    return node->data;
+    }
+};
 
 void add_song(AVLTree<Song>& t, AVLTree<Song>& a, AVLTree<Song>& al, AVLTree<Song>& g, Song& s) {
     t.add(s, s.title);

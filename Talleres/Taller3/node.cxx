@@ -1,4 +1,5 @@
-#include "Node.h"
+#pragma once
+#include "node.hpp"
 
 template<typename T>
 Node<T>::Node(T val, string attr) {

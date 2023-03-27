@@ -1,5 +1,6 @@
-#ifndef NODE_H
-#define NODE_H
+//#ifndef NODE_H
+//#define NODE_H
+#pragma once
 
 #include <string>
 
@@ -16,6 +17,5 @@ public:
 
     Node(T val, string attr);
 };
-
 #include "node.cxx"
-#endif
+//#endif

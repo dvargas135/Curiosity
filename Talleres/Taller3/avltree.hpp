@@ -1,9 +1,12 @@
-#ifndef AVLTREE_H
-#define AVLTREE_H
+//#ifndef AVLTREE_H
+//#define AVLTREE_H
+#pragma once
 
 #include <vector>
 #include <string>
-#include "node.h"
+
+#include "node.hpp"
+#include "song.hpp"
 
 template<typename T>
 class AVLTree {
@@ -29,6 +32,5 @@ public:
     Node<T>* find(std::string title);
     Song nodeToSong(Node<Song>* node);
 };
-
 #include "avltree.cxx"
-#endif
+//#endif

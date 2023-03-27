@@ -63,9 +63,5 @@ int main( int argc, char** argv){
             }
         }
     }while (opc!=10);
-    correr();
     return 0;
-}
-
-void correr (){
 }

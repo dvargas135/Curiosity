@@ -1,46 +1,65 @@
-OBJS	= main.o command.o curiosity.o system.o util.o cargar.o ayuda.o agregar.o element.o guardar.o simular_comandos.o
-SOURCE	= main.cxx classes/command.cxx classes/curiosity.cxx classes/system.cxx util/util.cxx commands/cargar.cxx commands/ayuda.cxx commands/agregar.cxx classes/element.cxx commands/guardar.cxx commands/simular_comandos.cxx
-HEADER	=       classes/command.hpp classes/curiosity.hpp classes/system.hpp util/util.hpp commands/cargar.hpp commands/ayuda.hpp commands/agregar.hpp classes/element.hpp commands/guardar.hpp commands/simular_comandos.hpp
-OUT		= main
-CC		= g++
-FLAGS	= -std=c++11 -g -c -Wall
-LFLAGS	= 
+OBJS   = obj/main.o obj/command.o obj/curiosity.o obj/element.o obj/system.o obj/vector.o obj/agregar.o obj/ayuda.o obj/cargar.o obj/guardar.o obj/simular_comandos.o obj/ubicar_elementos.o obj/util.o
+SOURCE = main.cxx classes/command.cxx classes/curiosity.cxx classes/element.cxx classes/system.cxx classes/vector.cxx commands/agregar.cxx commands/ayuda.cxx commands/cargar.cxx commands/guardar.cxx commands/simular_comandos.cxx commands/ubicar_elementos.cxx util/util.cxx
+HEADER = classes/command.hpp classes/curiosity.hpp classes/element.hpp classes/system.hpp classes/vector.hpp commands/agregar.hpp commands/ayuda.hpp commands/cargar.hpp commands/guardar.hpp commands/simular_comandos.hpp commands/ubicar_elementos.hpp util/util.hpp
+OUT = main
+CC = g++
+FLAGS = -std=c++11 -g -c -Wall
+LFLAGS = 
 
-main: $(OBJS)
+$(OUT): $(OBJS)
 	$(CC) -g $(OBJS) -o $(OUT)
-main.o: main.cxx
-	$(CC) $(FLAGS) main.cxx 
+obj/main.o: main.cxx
+	$(CC) $(FLAGS) main.cxx -o obj/main.o
 
-command.o: classes/command.cxx
-	$(CC) $(FLAGS) classes/command.cxx 
+obj/command.o: classes/command.cxx
+	$(CC) $(FLAGS) classes/command.cxx -o obj/command.o
 
-curiosity.o: classes/curiosity.cxx
-	$(CC) $(FLAGS) classes/curiosity.cxx 
+obj/curiosity.o: classes/curiosity.cxx
+	$(CC) $(FLAGS) classes/curiosity.cxx -o obj/curiosity.o
 
-system.o: classes/system.cxx
-	$(CC) $(FLAGS) classes/system.cxx 
+obj/element.o: classes/element.cxx
+	$(CC) $(FLAGS) classes/element.cxx -o obj/element.o
 
-util.o: util/util.cxx
-	$(CC) $(FLAGS) util/util.cxx 
+obj/system.o: classes/system.cxx
+	$(CC) $(FLAGS) classes/system.cxx -o obj/system.o
 
-cargar.o: commands/cargar.cxx
-	$(CC) $(FLAGS) commands/cargar.cxx 
+obj/vector.o: classes/vector.cxx
+	$(CC) $(FLAGS) classes/vector.cxx -o obj/vector.o
 
-ayuda.o: commands/ayuda.cxx
-	$(CC) $(FLAGS) commands/ayuda.cxx 
+obj/agregar.o: commands/agregar.cxx
+	$(CC) $(FLAGS) commands/agregar.cxx -o obj/agregar.o
 
-agregar.o: commands/agregar.cxx
-	$(CC) $(FLAGS) commands/agregar.cxx 
+obj/ayuda.o: commands/ayuda.cxx
+	$(CC) $(FLAGS) commands/ayuda.cxx -o obj/ayuda.o
 
-element.o: classes/element.cxx
-	$(CC) $(FLAGS) classes/element.cxx 
+obj/cargar.o: commands/cargar.cxx
+	$(CC) $(FLAGS) commands/cargar.cxx -o obj/cargar.o
 
-guardar.o: commands/guardar.cxx
-	$(CC) $(FLAGS) commands/guardar.cxx 
+obj/guardar.o: commands/guardar.cxx
+	$(CC) $(FLAGS) commands/guardar.cxx -o obj/guardar.o
 
-simular_comandos.o: commands/simular_comandos.cxx
-	$(CC) $(FLAGS) commands/simular_comandos.cxx 
+obj/simular_comandos.o: commands/simular_comandos.cxx
+	$(CC) $(FLAGS) commands/simular_comandos.cxx -o obj/simular_comandos.o
 
+obj/ubicar_elementos.o: commands/ubicar_elementos.cxx
+	$(CC) $(FLAGS) commands/ubicar_elementos.cxx -o obj/ubicar_elementos.o
+
+obj/util.o: util/util.cxx
+	$(CC) $(FLAGS) util/util.cxx -o obj/util.o
+
+#new classes added for component ii
+obj/point.o: trees/quad/point.cxx
+	$(CC) $(FLAGS) trees/quad/point.cxx -o obj/point.o
+
+obj/quadnode.o: trees/quad/quadnode.cxx
+	$(CC) $(FLAGS) trees/quad/quadnode.cxx -o obj/quadnode.o
+
+obj/quadtree.o: trees/quad/quadtree.cxx
+	$(CC) $(FLAGS) trees/quad/quadtree.cxx -o obj/quadtree.o
 
 clean:
+ifeq ($(OS), Windows_NT)
+	del /Q obj\*.o $(OUT).exe
+else
 	rm -f $(OBJS) $(OUT)
+endif

@@ -1,5 +1,5 @@
-#ifndef CARGAR_H
-#define CARGAR_H
+#ifndef CARGAR_HPP
+#define CARGAR_HPP
 
 #include <string>
 #include "../classes/system.hpp"

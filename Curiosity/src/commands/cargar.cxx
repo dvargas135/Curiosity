@@ -2,9 +2,9 @@
 #include "../util/util.hpp"
 #include "../classes/command.hpp"
 #include "../classes/element.hpp"
+#include "../classes/vector.hpp"
 
 #include <fstream>
-#include <string>
 #include <sstream>
 #include <unistd.h>
 #include <cstdio>
@@ -99,6 +99,7 @@ void cargar_elementos(std::string filename, System& sys) {
             if (!(size >= 0.0)) { printf("%s Saltando línea: %s\n", errorMsg.c_str(), line.c_str()); continue; }
             x = std::stod(col4);
             y = std::stod(col5);
+            
         } catch (const std::invalid_argument& e) {
             printf("%s Saltando línea: %s\n", errorMsg.c_str(), line.c_str());
             continue;
@@ -108,7 +109,8 @@ void cargar_elementos(std::string filename, System& sys) {
             printf("%s Saltando línea: %s\n", errorMsg.c_str(), line.c_str());
             continue;
         }
-        Element* e = new Element(col1, size, col3, x, y);
+        Vector p(x, y);
+        Element* e = new Element(col1, size, col3, p);
         sys.addElement(e);
         printf("Elemento `%s %s %s %s %s` cargado exitosamente.\n", col1.c_str(), col2.c_str(), col3.c_str(), col4.c_str(), col5.c_str());
     }

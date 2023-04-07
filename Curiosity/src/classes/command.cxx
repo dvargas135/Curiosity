@@ -1,5 +1,4 @@
 #include "command.hpp"
-#include <string>
 
 Command::Command(const std::string& type) : type(type) {}
 Command::~Command() {}

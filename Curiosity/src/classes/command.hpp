@@ -1,5 +1,5 @@
-#ifndef COMMAND_H
-#define COMMAND_H
+#ifndef COMMAND_HPP
+#define COMMAND_HPP
 
 #include <string>
 

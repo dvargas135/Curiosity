@@ -1,5 +1,5 @@
-#ifndef SIMULAR_COMANDOS_H
-#define SIMULAR_COMANDOS_H
+#ifndef SIMULAR_COMANDOS_HPP
+#define SIMULAR_COMANDOS_HPP
 
 #include "../classes/system.hpp"
 #include <string>

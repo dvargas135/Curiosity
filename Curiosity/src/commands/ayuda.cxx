@@ -1,8 +1,6 @@
 #include "ayuda.hpp"
 
-#include <iostream>
-#include <map>
-#include <string>
+#include <cstdio>
 
 void ayuda(std::map<std::string, int> cmd_map, std::string cmd) {
     switch (cmd_map[cmd]) {

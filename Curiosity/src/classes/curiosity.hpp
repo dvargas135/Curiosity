@@ -1,5 +1,5 @@
-#ifndef CURIOSITY_H
-#define CURIOSITY_H
+#ifndef CURIOSITY_HPP
+#define CURIOSITY_HPP
 
 #include "command.hpp"
 

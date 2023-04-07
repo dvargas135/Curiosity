@@ -1,5 +1,5 @@
-#ifndef AYUDA_H
-#define AYUDA_H
+#ifndef AYUDA_HPP
+#define AYUDA_HPP
 
 #include <map>
 #include <string>

@@ -1,5 +1,5 @@
-#ifndef AGREGAR_G
-#define AGREGAR_G
+#ifndef AGREGAR_HPP
+#define AGREGAR_HPP
 
 #include "../classes/system.hpp"
 #include <string>

@@ -3,7 +3,6 @@
 #include "../classes/command.hpp"
 #include "../classes/element.hpp"
 
-#include <string>
 #include <cstdio>
 #include <stdexcept>
 
@@ -62,7 +61,8 @@ void agregar_elemento(std::string type, std::string size_str, std::string measur
         printf("%s\n", errorMsg.c_str());
         return;
     }
-    Element* e = new Element(type, size, measurement_unit, x, y);
+    Vector position(x, y);
+    Element* e = new Element(type, size, measurement_unit, position);
     sys.addElement(e);
     delete e;
 

@@ -52,7 +52,7 @@ void guardar(std::string type, std::string filename, System& sys) {
 
         while (!element_list.empty()) {
             Element* e = element_list.front();
-            outfile << e->getType() << " " << e->getSize() << " " << e->getMeasurementUnit() << " " << e->getX() << " " << e->getY() << "\n";
+            outfile << e->getType() << " " << e->getSize() << " " << e->getMeasurementUnit() << " " << e->getPosition().getX() << " " << e->getPosition().getY() << "\n";
             element_list.pop();
         }
         outfile.close();

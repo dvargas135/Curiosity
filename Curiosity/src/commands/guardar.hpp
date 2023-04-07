@@ -1,5 +1,5 @@
-#ifndef GUARDAR_H
-#define GUARDAR_H
+#ifndef GUARDAR_HPP
+#define GUARDAR_HPP
 
 #include "../classes/system.hpp"
 #include <string>

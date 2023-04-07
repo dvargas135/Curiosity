@@ -13,6 +13,7 @@
 #include "./commands/agregar.hpp"
 #include "./commands/guardar.hpp"
 #include "./commands/simular_comandos.hpp"
+#include "./commands/ubicar_elementos.hpp"
 
 int main() {
     System sys;
@@ -31,7 +32,7 @@ int main() {
         {"ruta_mas_larga", 12},
         {"ayuda", 13},
     };
-    //test
+    
     std::string cmd;
 
     do {
@@ -115,7 +116,7 @@ int main() {
                     ayuda(cmd_map, *(it+0));
                     break;
                 }
-                //ubicar_elementos();
+                ubicar_elementos();
                 break;
             case 10:
                 if (args != 4) {

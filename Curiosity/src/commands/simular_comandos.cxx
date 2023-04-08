@@ -2,7 +2,6 @@
 #include "../classes/curiosity.hpp"
 #include "../classes/command.hpp"
 
-#include <string>
 #include <cstdio>
 #include <stdexcept>
 
@@ -23,8 +22,11 @@ void simular_comandos(std::string x_str, std::string y_str, std::string d_str, S
     printf("Simulando comandos... Posición inicial: %s\n\n", c.getLocation().c_str());
 
     std::queue<Command*> command_list = sys.getCommands();
-    if (command_list.empty()) { printf("La información requerida no está almacenada en memoria.\n"); }
-
+    
+    if (command_list.empty()) {
+        printf("La información requerida no está almacenada en memoria.\n");
+        return;
+    }
     
     while (!command_list.empty()) {
         Command* s = command_list.front();

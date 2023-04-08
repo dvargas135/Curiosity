@@ -1,1 +1,3 @@
-void ubicar_elementos();
+#include "../classes/system.hpp"
+
+void ubicar_elementos(System);

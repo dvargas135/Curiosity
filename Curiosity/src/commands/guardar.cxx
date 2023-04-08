@@ -45,13 +45,13 @@ void guardar(std::string type, std::string filename, System& sys) {
         }
         
         std::ofstream outfile(filepath);
-        std::queue<Element*> element_list = sys.getElements();
+        std::queue<Element> element_list = sys.getElements();
 
         if (element_list.empty()) { printf("%s\n", errorMsg.c_str()); }
 
         while (!element_list.empty()) {
-            Element* e = element_list.front();
-            outfile << e->getType() << " " << e->getSize() << " " << e->getMeasurementUnit() << " " << e->getPosition().getX() << " " << e->getPosition().getY() << "\n";
+            Element e = element_list.front();
+            outfile << e.getType() << " " << e.getSize() << " " << e.getMeasurementUnit() << " " << e.getPosition().getX() << " " << e.getPosition().getY() << "\n";
             element_list.pop();
         }
         outfile.close();

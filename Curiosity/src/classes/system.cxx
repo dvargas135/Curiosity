@@ -12,11 +12,11 @@ void System::clearCommands() {
     this->cmd_list = {};
 }
 
-void System::addElement(Element* c) {
+void System::addElement(Element& c) {
     this->elmt_list.push(c);
 }
 
-std::queue<Element*> System::getElements() const {
+std::queue<Element> System::getElements() const {
     return elmt_list;
 }
 

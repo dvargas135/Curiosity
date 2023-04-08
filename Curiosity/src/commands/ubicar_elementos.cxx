@@ -4,7 +4,7 @@
 
 void ubicar_elementos(System s) {
     QuadTree tree;
-    std::queue<Element*> e_list = s.getElements();
+    std::queue<Element> e_list = s.getElements();
     
     if (e_list.empty()) {
         printf("La información requerida no está almacenada en memoria.\n");
@@ -12,7 +12,7 @@ void ubicar_elementos(System s) {
     }
     
     while (!e_list.empty()) {
-        Point p = vectorToPoint(e_list.front()->getPosition());
+        Point p = vectorToPoint(e_list.front().getPosition());
         tree.insert(p);
         e_list.pop();
     }

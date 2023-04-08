@@ -111,7 +111,7 @@ void cargar_elementos(std::string filename, System& sys) {
             continue;
         }
         Vector p(x, y);
-        Element* e = new Element(col1, size, col3, p);
+        Element e(col1, size, col3, p);
         sys.addElement(e);
         printf("Elemento `%s %s %s %s %s` cargado exitosamente.\n", col1.c_str(), col2.c_str(), col3.c_str(), col4.c_str(), col5.c_str());
     }

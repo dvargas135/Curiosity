@@ -18,4 +18,4 @@ private:
     double y;
 };
 
-#endif // _Vector_H_
+#endif

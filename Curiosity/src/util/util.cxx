@@ -1,4 +1,6 @@
 #include "util.hpp"
+#include "../classes/vector.hpp"
+#include "../trees/quad/point.hpp"
 
 #include <algorithm>
 #include <ctype.h>
@@ -36,4 +38,8 @@ bool file_exists(const std::string& name) {
 
 bool file_is_empty(std::ifstream& pFile) {
     return pFile.peek() == std::ifstream::traits_type::eof();
+}
+
+Point vectorToPoint(const Vector& v) {
+    return Point{v.getX(), v.getY()};
 }

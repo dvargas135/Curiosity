@@ -12,6 +12,7 @@
 
 void cargar_comandos(std::string filename, System& sys) {
     sys.clearCommands();
+    
     std::string filepath = "textfiles/commands/" + filename;
     if (!file_exists(filepath)) {
         printf("%s no se encuentra o no puede leerse.\n", filename.c_str());
@@ -72,7 +73,7 @@ void cargar_comandos(std::string filename, System& sys) {
 void cargar_elementos(std::string filename, System& sys) {
     std::string errorMsg = "La información del análisis no corresponde a los datos esperados (tipo, objeto, comentario).";
     sys.clearElements();
-    //std::string filepath = "src/motion_files/analysis/" + fileName;
+
     std::string filepath = "textfiles/elements/" + filename;
     if (!file_exists(filepath)) {
         printf("%s no se encuentra o no puede leerse.\n", filename.c_str());

@@ -11,6 +11,6 @@ bool Point::operator == (const Point &p) const {
 }
 
 std::ostream& operator << (std::ostream &o, const Point &p) {
-    o << "(" << p.x << "," << p.y << ")";
+    o << "(" << p.x << ", " << p.y << ")";
     return o;
 }

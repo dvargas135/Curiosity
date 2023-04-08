@@ -116,7 +116,7 @@ int main() {
                     ayuda(cmd_map, *(it+0));
                     break;
                 }
-                ubicar_elementos();
+                ubicar_elementos(sys);
                 break;
             case 10:
                 if (args != 4) {

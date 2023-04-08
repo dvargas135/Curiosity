@@ -6,7 +6,6 @@
 #include <ctype.h>
 #include <fstream>
 #include <stdio.h>
-#include <string>
 
 bool is_positive(const std::string& s) {
     return !s.empty() && std::find_if(

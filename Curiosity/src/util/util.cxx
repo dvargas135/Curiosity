@@ -1,10 +1,7 @@
 #include "util.hpp"
-#include "../classes/vector.hpp"
-#include "../trees/quad/point.hpp"
 
 #include <algorithm>
 #include <ctype.h>
-#include <fstream>
 #include <stdio.h>
 
 bool is_positive(const std::string& s) {

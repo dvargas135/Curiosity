@@ -1,6 +1,9 @@
 #ifndef UTIL_HPP
 #define UTIL_HPP
 
+#include "../trees/quad/point.hpp"
+#include "../classes/vector.hpp"
+
 #include <fstream>
 #include <string>
 

@@ -1,7 +1,9 @@
 #include "quadtree.hpp"
 #include <queue>
 
-QuadTree::QuadTree() : root(nullptr) {}
+QuadTree::QuadTree() {
+    root = nullptr;
+}
 
 QuadTree::QuadTree(Point val) {
     root = new QuadNode(val);
@@ -12,7 +14,7 @@ QuadTree::~QuadTree() {
 }
 
 void QuadTree::deleteSubtree(QuadNode* node) {
-    if (node) {
+    if (node != nullptr) {
         deleteSubtree(node->getSuperiorLeftChild());
         deleteSubtree(node->getSuperiorRightChild());
         deleteSubtree(node->getInferiorLeftChild());
@@ -22,11 +24,11 @@ void QuadTree::deleteSubtree(QuadNode* node) {
 }
 
 Point QuadTree::rootData() {
-    if (root) {
+    if (root != nullptr) {
         return root->getData();
     } else {
-        std::cerr << "Error: QuadTree is empty." << std::endl;
-        return Point();
+        std::cerr << "Error: root is null." << std::endl;
+        return Point{0, 0};
     }
 }
 
@@ -39,70 +41,82 @@ void QuadTree::setRoot(QuadNode* rootNode) {
 }
 
 bool QuadTree::isEmpty() {
-    return root == nullptr;
+    return (root == nullptr);
 }
 
-bool QuadTree::insert(Point val) {
-    if (isEmpty()) {
-        root = new QuadNode(val);
+bool QuadTree::insert(Point& val) {
+    QuadNode* newNode = new QuadNode(val);
+
+    if (root == nullptr) {
+        root = newNode;
         return true;
     } else {
-        return insert(val, root);
-    }
-}
+        QuadNode* currentNode = root;
 
-bool QuadTree::insert(Point val, QuadNode* node) {
-    if (node->isLeaf()) {
-        QuadNode* newNode = new QuadNode(val);
-        if (val == node->getData()) {
-            delete newNode;
-            return false;
-        } else {
-            subdivide(node);
-            insert(val, node);
-        }
-    } else {
-        if (val == node->getData()) {
-            return false;
-        } else {
-            if (val.x < node->getData().x) {
-                if (val.y < node->getData().y) {
-                    return insert(val, node->getInferiorLeftChild());
+        while (true) {
+            if (currentNode->getData() == val) {
+                delete newNode;
+                return false;
+            }
+
+            if (val.x < currentNode->getData().x) {
+                if (val.y < currentNode->getData().y) {
+                    if (currentNode->getInferiorLeftChild() == nullptr) {
+                        currentNode->setInferiorLeftChild(newNode);
+                        return true;
+                    } else {
+                        currentNode = currentNode->getInferiorLeftChild();
+                    }
                 } else {
-                    return insert(val, node->getSuperiorLeftChild());
+                    if (currentNode->getSuperiorLeftChild() == nullptr) {
+                        currentNode->setSuperiorLeftChild(newNode);
+                        return true;
+                    } else {
+                        currentNode = currentNode->getSuperiorLeftChild();
+                    }
                 }
             } else {
-                if (val.y < node->getData().y) {
-                    return insert(val, node->getInferiorRightChild());
+                if (val.y < currentNode->getData().y) {
+                    if (currentNode->getInferiorRightChild() == nullptr) {
+                        currentNode->setInferiorRightChild(newNode);
+                        return true;
+                    } else {
+                        currentNode = currentNode->getInferiorRightChild();
+                    }
                 } else {
-                    return insert(val, node->getSuperiorRightChild());
+                    if (currentNode->getSuperiorRightChild() == nullptr) {
+                        currentNode->setSuperiorRightChild(newNode);
+                        return true;
+                    } else {
+                        currentNode = currentNode->getSuperiorRightChild();
+                    }
                 }
             }
         }
     }
 }
 
-void QuadTree::subdivide(QuadNode* node) {
-    Point center = node->getData();
-    int x = center.x;
-    int y = center.y;
-    node->setInferiorLeftChild(new QuadNode(Point(x - 1, y - 1)));
-    node->setInferiorRightChild(new QuadNode(Point(x + 1, y - 1)));
-    node->setSuperiorLeftChild(new QuadNode(Point(x - 1, y + 1)));
-    node->setSuperiorRightChild(new QuadNode(Point(x + 1, y + 1)));
+void QuadTree::preOrder(QuadNode* root) {
+    if (root != nullptr) {
+        std::cout << root->getData() << " ";
+        preOrder(root->getSuperiorLeftChild());
+        preOrder(root->getSuperiorRightChild());
+        preOrder(root->getInferiorLeftChild());
+        preOrder(root->getInferiorRightChild());
+    }
 }
 
 void QuadTree::preOrder() {
     preOrder(root);
 }
 
-void QuadTree::preOrder(QuadNode* node) {
-    if (node) {
-        std::cout << node->getData() << " ";
-        preOrder(node->getSuperiorLeftChild());
-        preOrder(node->getSuperiorRightChild());
-        preOrder(node->getInferiorLeftChild());
-        preOrder(node->getInferiorRightChild());
+void QuadTree::inOrder(QuadNode* root) {
+    if (root != nullptr) {
+        inOrder(root->getSuperiorLeftChild());
+        std::cout << root->getData() << " ";
+        inOrder(root->getSuperiorRightChild());
+        inOrder(root->getInferiorLeftChild());
+        inOrder(root->getInferiorRightChild());
     }
 }
 
@@ -110,42 +124,43 @@ void QuadTree::inOrder() {
     inOrder(root);
 }
 
-void QuadTree::inOrder(QuadNode* node) {
-    if (node) {
-        inOrder(node->getSuperiorLeftChild());
-        std::cout << node->getData() << " ";
-        inOrder(node->getSuperiorRightChild());
-        inOrder(node->getInferiorLeftChild());
-        inOrder(node->getInferiorRightChild());
+void QuadTree::postOrder(QuadNode* root) {
+    if (root != nullptr) {
+        postOrder(root->getSuperiorLeftChild());
+        postOrder(root->getSuperiorRightChild());
+        postOrder(root->getInferiorLeftChild());
+        postOrder(root->getInferiorRightChild());
+        std::cout << root->getData() << " ";
     }
+}
+
+void QuadTree::postOrder() {
+    postOrder(root);
 }
 
 void QuadTree::levelOrder() {
-    if (root == nullptr) {
-        return;
-    }
-    std::queue<QuadNode*> q;
-    q.push(root);
-    while (!q.empty()) {
-        QuadNode* current = q.front();
-        std::cout << current->getData() << " ";
-        q.pop();
-        if (current->getSuperiorLeftChild() != nullptr) {
-            q.push(current->getSuperiorLeftChild());
-        }
-        if (current->getSuperiorRightChild() != nullptr) {
-            q.push(current->getSuperiorRightChild());
-        }
-        if (current->getInferiorLeftChild() != nullptr) {
-            q.push(current->getInferiorLeftChild());
-        }
-        if (current->getInferiorRightChild() != nullptr) {
-            q.push(current->getInferiorRightChild());
-        }
-    }
-    std::cout << std::endl;
-}
+    if (root != nullptr) {
+        std::queue<QuadNode*> q;
+        q.push(root);
 
-bool QuadTree::isEmpty() {
-    return root == nullptr;
+        while (!q.empty()) {
+            QuadNode* current = q.front();
+            q.pop();
+
+            std::cout << current->getData() << " ";
+
+            if (current->getSuperiorLeftChild() != nullptr) {
+                q.push(current->getSuperiorLeftChild());
+            }
+            if (current->getSuperiorRightChild() != nullptr) {
+                q.push(current->getSuperiorRightChild());
+            }
+            if (current->getInferiorLeftChild() != nullptr) {
+                q.push(current->getInferiorLeftChild());
+            }
+            if (current->getInferiorRightChild() != nullptr) {
+                q.push(current->getInferiorRightChild());
+            }
+        }
+    }
 }

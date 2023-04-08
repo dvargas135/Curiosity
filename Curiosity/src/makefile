@@ -1,6 +1,6 @@
-OBJS   = obj/main.o obj/command.o obj/curiosity.o obj/element.o obj/system.o obj/vector.o obj/agregar.o obj/ayuda.o obj/cargar.o obj/guardar.o obj/simular_comandos.o obj/ubicar_elementos.o obj/util.o
-SOURCE = main.cxx classes/command.cxx classes/curiosity.cxx classes/element.cxx classes/system.cxx classes/vector.cxx commands/agregar.cxx commands/ayuda.cxx commands/cargar.cxx commands/guardar.cxx commands/simular_comandos.cxx commands/ubicar_elementos.cxx util/util.cxx
-HEADER = classes/command.hpp classes/curiosity.hpp classes/element.hpp classes/system.hpp classes/vector.hpp commands/agregar.hpp commands/ayuda.hpp commands/cargar.hpp commands/guardar.hpp commands/simular_comandos.hpp commands/ubicar_elementos.hpp util/util.hpp
+OBJS   = obj/main.o obj/command.o obj/curiosity.o obj/element.o obj/system.o obj/vector.o obj/agregar.o obj/ayuda.o obj/cargar.o obj/guardar.o obj/simular_comandos.o obj/ubicar_elementos.o obj/util.o obj/point.o obj/quadnode.o obj/quadtree.o
+SOURCE = main.cxx classes/command.cxx classes/curiosity.cxx classes/element.cxx classes/system.cxx classes/vector.cxx commands/agregar.cxx commands/ayuda.cxx commands/cargar.cxx commands/guardar.cxx commands/simular_comandos.cxx commands/ubicar_elementos.cxx util/util.cxx trees/quad/point.cxx trees/quad/quadnode.cxx trees/quad/quadtree.cxx
+HEADER = classes/command.hpp classes/curiosity.hpp classes/element.hpp classes/system.hpp classes/vector.hpp commands/agregar.hpp commands/ayuda.hpp commands/cargar.hpp commands/guardar.hpp commands/simular_comandos.hpp commands/ubicar_elementos.hpp util/util.hpp trees/quad/point.hpp trees/quad/quadnode.hpp trees/quad/quadtree.hpp
 OUT = main
 CC = g++
 FLAGS = -std=c++11 -g -c -Wall

@@ -1,4 +1,8 @@
+#ifndef QUADNODE_HPP
+#define QUADNODE_HPP
+
 #include "point.hpp"
+
 class QuadNode {
     protected:
         Point data;
@@ -22,3 +26,5 @@ class QuadNode {
         void setInferiorRightChild(QuadNode* iright);
         bool isLeaf();
 };
+
+#endif

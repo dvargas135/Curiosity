@@ -6,6 +6,7 @@
 #include <vector>
 #include <cstdio>
 
+#include "./commands/en_cuadrante.hpp"
 #include "./classes/command.hpp"
 #include "./classes/system.hpp"
 #include "./commands/ayuda.hpp"
@@ -17,6 +18,7 @@
 
 int main() {
     System sys;
+    bool entro=false;
     std::map<std::string, int> cmd_map {
         {"cargar_comandos", 1},
         {"cargar_elementos", 2},
@@ -119,11 +121,12 @@ int main() {
                 ubicar_elementos(sys);
                 break;
             case 10:
-                if (args != 4) {
+                if (args != 4 || entro!=true) {
                     ayuda(cmd_map, *(it+0));
                     break;
                 }
-                //en_cuadrante(*(it+1), *(it+2), *(it+3), *(it+4));
+             /*
+                en_cuadrante(*(it+1), *(it+2), *(it+3), *(it+4));*/
                 break;
             case 11:
                 if (args != 1) {

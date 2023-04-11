@@ -2,7 +2,7 @@
 #include "../trees/quad/quadtree.hpp"
 #include "../util/util.hpp"
 
-void ubicar_elementos(System s) {
+void ubicar_elementos(System& s, bool& entro) {
     QuadTree tree;
     std::queue<Element> e_list = s.getElements();
     
@@ -17,6 +17,10 @@ void ubicar_elementos(System s) {
         e_list.pop();
     }
 
+    // s.setTree(tree);
+    s.setTreeRoot(tree.getRoot());
+    printf("%d\n", s.getTree().isEmpty());
+
     std::cout << "Pre-order: ";
     tree.preOrder();
     
@@ -30,4 +34,5 @@ void ubicar_elementos(System s) {
     tree.levelOrder();
 
     std::cout << std::endl;
+    entro=true;
 }

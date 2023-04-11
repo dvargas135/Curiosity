@@ -2,10 +2,8 @@
 #define QUADTREE_HPP
 
 #include "quadnode.hpp"
-#include "../classes/element.hpp"
+#include "../../classes/element.hpp"
 #include <vector>
-using namespace std;
-
 
 class QuadTree {
     protected:
@@ -21,7 +19,7 @@ class QuadTree {
         bool isEmpty();
         bool insert(Point& val);
         void preOrder(QuadNode* root);
-        vector<Point> QuadTree::listaPreorder(QuadNode* root, double x1, double x2, double y1, double y2,vector<Point> puntos);
+        std::vector<Point> listaPreorder(QuadNode* root, double x1, double x2, double y1, double y2,std::vector<Point> puntos);
         void preOrder();
         void inOrder(QuadNode* root);
         void inOrder();

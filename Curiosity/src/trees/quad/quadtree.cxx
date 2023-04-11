@@ -1,6 +1,5 @@
 #include "quadtree.hpp"
 #include <queue>
-#include "../classes/element.hpp"
 #include <vector>
 using namespace std;
 
@@ -109,8 +108,7 @@ void QuadTree::preOrder(QuadNode* root) {
     }
 }
 
-vector<Point> QuadTree::listaPreorder(QuadNode* root,double x1, double x2, double y1, double y2,vector<Point> puntos){
-    
+std::vector<Point> QuadTree::listaPreorder(QuadNode* root, double x1, double x2, double y1, double y2,std::vector<Point> puntos){
     if (root != nullptr) {
         if(root->getData().x>x1 && root->getData().x<x2 && root->getData().y>y1 && root->getData().y<y2){
         puntos.push_back(root->getData());}

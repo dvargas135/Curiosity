@@ -19,7 +19,7 @@ class QuadTree {
         bool isEmpty();
         bool insert(Point& val);
         void preOrder(QuadNode* root);
-        std::vector<Point> listaPreorder(QuadNode* root, double x1, double x2, double y1, double y2,std::vector<Point> puntos);
+        std::vector<Point> listaPreorder(QuadNode* root, double x1, double x2, double y1, double y2, std::vector<Point> puntos);
         void preOrder();
         void inOrder(QuadNode* root);
         void inOrder();

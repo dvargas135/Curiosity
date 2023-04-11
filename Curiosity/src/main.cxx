@@ -18,7 +18,7 @@
 
 int main() {
     System sys;
-    bool entro=false;
+    // bool entro=false;
     std::map<std::string, int> cmd_map {
         {"cargar_comandos", 1},
         {"cargar_elementos", 2},
@@ -114,14 +114,14 @@ int main() {
                 printf("\n\nTerminando proceso...\n");
                 return 0;
             case 9:
-                if (args != 0) {
-                    ayuda(cmd_map, *(it+0));
-                    break;
-                }
-                ubicar_elementos(sys, entro);
+                // if (args != 0) {
+                //     ayuda(cmd_map, *(it+0));
+                //     break;
+                // }
+                ubicar_elementos(sys);
                 break;
             case 10:
-                if (args != 4 || entro!=true) {
+                if (args != 4) {
                     ayuda(cmd_map, *(it+0));
                     break;
                 }
@@ -129,7 +129,8 @@ int main() {
                 break;
             case 11:
                 if (args != 1) {
-                    ayuda(cmd_map, *(it+0));
+                    //ayuda(cmd_map, *(it+0));
+                    
                     break;
                 }
                 //crear_mapa(*(it+1));

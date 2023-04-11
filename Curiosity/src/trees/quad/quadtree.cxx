@@ -112,10 +112,10 @@ std::vector<Point> QuadTree::listaPreorder(QuadNode* root, double x1, double x2,
     if (root != nullptr) {
         if(root->getData().x>x1 && root->getData().x<x2 && root->getData().y>y1 && root->getData().y<y2){
         puntos.push_back(root->getData());}
-        puntos=listaPreorder(root->getSuperiorLeftChild(),x1,x2,y1,y2,puntos);
-        puntos=listaPreorder(root->getSuperiorRightChild(),x1,x2,y1,y2,puntos);
-        puntos=listaPreorder(root->getInferiorLeftChild(),x1,x2,y1,y2,puntos);
-        puntos=listaPreorder(root->getInferiorRightChild(),x1,x2,y1,y2,puntos);
+        puntos=listaPreorder(root->getSuperiorLeftChild(), x1, x2, y1, y2, puntos);
+        puntos=listaPreorder(root->getSuperiorRightChild(), x1, x2, y1, y2, puntos);
+        puntos=listaPreorder(root->getInferiorLeftChild(), x1, x2, y1, y2, puntos);
+        puntos=listaPreorder(root->getInferiorRightChild(), x1, x2, y1, y2, puntos);
     
     }
     return puntos;

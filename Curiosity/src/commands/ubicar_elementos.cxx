@@ -2,12 +2,13 @@
 #include "../trees/quad/quadtree.hpp"
 #include "../util/util.hpp"
 
-void ubicar_elementos(System& s, bool& entro) {
+void ubicar_elementos(System& s) {
+    std::string errorMsg = "La información requerida no está almacenada en memoria.";
     QuadTree tree;
     std::queue<Element> e_list = s.getElements();
     
     if (e_list.empty()) {
-        printf("La información requerida no está almacenada en memoria.\n");
+        printf("%s\n", errorMsg.c_str());
         return;
     }
     
@@ -19,20 +20,20 @@ void ubicar_elementos(System& s, bool& entro) {
 
     // s.setTree(tree);
     s.setTreeRoot(tree.getRoot());
-    printf("%d\n", s.getTree().isEmpty());
 
-    std::cout << "Pre-order: ";
-    tree.preOrder();
+    printf("Los elementos han sido procesados exitosamente.\n");
+
+    // std::cout << "Pre-order: ";
+    // tree.preOrder();
     
-    std::cout << std::endl << "In-order: ";
-    tree.inOrder();
+    // std::cout << std::endl << "In-order: ";
+    // tree.inOrder();
     
-    std::cout << std::endl << "Post-order: ";
-    tree.postOrder();
+    // std::cout << std::endl << "Post-order: ";
+    // tree.postOrder();
 
-    std::cout << std::endl << "Level-order: ";
-    tree.levelOrder();
+    // std::cout << std::endl << "Level-order: ";
+    // tree.levelOrder();
 
-    std::cout << std::endl;
-    entro=true;
+    // std::cout << std::endl;
 }

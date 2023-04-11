@@ -6,7 +6,6 @@
 #include <vector>
 #include <cstdio>
 
-#include "./commands/en_cuadrante.hpp"
 #include "./classes/command.hpp"
 #include "./classes/system.hpp"
 #include "./commands/ayuda.hpp"
@@ -15,6 +14,7 @@
 #include "./commands/guardar.hpp"
 #include "./commands/simular_comandos.hpp"
 #include "./commands/ubicar_elementos.hpp"
+#include "./commands/en_cuadrante.hpp"
 
 int main() {
     System sys;
@@ -118,15 +118,14 @@ int main() {
                     ayuda(cmd_map, *(it+0));
                     break;
                 }
-                ubicar_elementos(sys);
+                ubicar_elementos(sys, entro);
                 break;
             case 10:
                 if (args != 4 || entro!=true) {
                     ayuda(cmd_map, *(it+0));
                     break;
                 }
-             /*
-                en_cuadrante(*(it+1), *(it+2), *(it+3), *(it+4));*/
+                en_cuadrante(*(it+1), *(it+2), *(it+3), *(it+4), sys);
                 break;
             case 11:
                 if (args != 1) {

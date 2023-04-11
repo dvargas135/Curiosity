@@ -9,7 +9,6 @@ std::vector<Point> en_cuadrante(std::string x1_str, std::string x2_str, std::str
     y1 = std::stod(y1_str);
     y2 = std::stod(y2_str);
     std::vector<Point> elementos;
-    //QuadTree tree;
 
     elementos=s.getTree().listaPreorder(s.getTree().getRoot(), x1, x2, y1, y2, elementos);
 

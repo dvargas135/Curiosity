@@ -1,11 +1,11 @@
-#ifndef _ubicar_h
-#define _ubicar_h
+#ifndef EN_CUADRANTE_HPP
+#define EN_CUADRANTE_HPP
 #include <vector>
-#include "../classes/element.hpp"
-#include "../trees\quad/quadnode.hpp"
-#include <iostream>
-using namespace std;
+//#include "../classes/element.hpp"
+#include "../trees/quad/quadnode.hpp"
+#include "../trees/quad/point.hpp"
+#include "../classes/system.hpp"
 
-vector<Element> en_cuadrante(double x1,double x2, double y1, double y2,QuadNode* root);
+std::vector<Point> en_cuadrante(std::string, std::string, std::string, std::string, System&);
 
 #endif

@@ -1,8 +1,10 @@
 #include "en_cuadrante.hpp"
 #include "../util/util.hpp"
+#include "../classes/vector.hpp"
+#include "../trees/quad/point.hpp"
 
 #include <cstdio>
-#include <string>
+#include <queue>
 
 // std::vector<Point> en_cuadrante(std::string x1_str, std::string x2_str, std::string y1_str, std::string y2_str, System& s) {
 void en_cuadrante(std::string x1_str, std::string x2_str, std::string y1_str, std::string y2_str, System& s) {
@@ -11,7 +13,7 @@ void en_cuadrante(std::string x1_str, std::string x2_str, std::string y1_str, st
         return;
     }
 
-    std::string errorMsg = "Los elementos no han sido ubicados todavía (con el comando ubicar_elementos).";
+    std::string errorMsg = "Los puntos no han sido ubicados todavía (con el comando ubicar_elementos).";
     if (s.getTree().isEmpty()) {
         printf("%s\n", errorMsg.c_str());
         return;
@@ -22,15 +24,32 @@ void en_cuadrante(std::string x1_str, std::string x2_str, std::string y1_str, st
     x2 = std::stod(x2_str);
     y1 = std::stod(y1_str);
     y2 = std::stod(y2_str);
-    std::vector<Point> elementos;
+    std::vector<Point> puntos;
 
-    elementos = s.getTree().listaPreorder(s.getTree().getRoot(), x1, x2, y1, y2, elementos);
+    puntos = s.getTree().listaPreorder(s.getTree().getRoot(), x1, x2, y1, y2, puntos);
 
     printf("Los elementos ubicados en el cuadrante solicitado son:\n");
 
-    for (auto a : elementos) {
-        printf(" %f, %f\n", a.getX(), a.getY());
-    }
+    comparePoints(s.getElements(), puntos);
+    
+    // for (auto a : puntos) {
+    //     printf(" %f, %f\n", a.getX(), a.getY());
+    // }
 
-    // return elementos;
+    // return puntos;
+}
+
+void comparePoints(std::queue<Element> elements, const std::vector<Point>& points) {
+    while (!elements.empty()) {
+        Element e = elements.front();
+        elements.pop();
+        for (Point p : points) {
+            if (p.x == e.getPosition().getX() && p.y == e.getPosition().getY()) {
+                std::cout << "---" << std::endl;
+                std::cout << "Type: " << e.getType() << std::endl;
+                std::cout << "Size: " << e.getSize() << " " << e.getMeasurementUnit() << std::endl;
+                std::cout << "Position: (" << e.getPosition().getX() << ", " << e.getPosition().getY() << ")" << std::endl;
+            }
+        }
+    }
 }

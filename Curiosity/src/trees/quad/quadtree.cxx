@@ -12,6 +12,7 @@ QuadTree::QuadTree(Point val) {
 }
 
 QuadTree::~QuadTree() {
+    if (nullptr != root) delete root;
     deleteSubtree(root);
 }
 
@@ -96,6 +97,7 @@ bool QuadTree::insert(Point& val) {
             }
         }
     }
+    delete newNode;
 }
 
 void QuadTree::preOrder(QuadNode* root) {

@@ -23,17 +23,17 @@ void ubicar_elementos(System& s) {
 
     printf("Los elementos han sido procesados exitosamente.\n");
 
-    // std::cout << "Pre-order: ";
-    // tree.preOrder();
+    std::cout << "Pre-order: ";
+    tree.preOrder();
     
-    // std::cout << std::endl << "In-order: ";
-    // tree.inOrder();
+    std::cout << std::endl << "In-order: ";
+    tree.inOrder();
     
-    // std::cout << std::endl << "Post-order: ";
-    // tree.postOrder();
+    std::cout << std::endl << "Post-order: ";
+    tree.postOrder();
 
-    // std::cout << std::endl << "Level-order: ";
-    // tree.levelOrder();
+    std::cout << std::endl << "Level-order: ";
+    tree.levelOrder();
 
-    // std::cout << std::endl;
+    std::cout << std::endl;
 }

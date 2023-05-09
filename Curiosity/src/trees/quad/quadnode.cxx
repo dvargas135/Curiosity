@@ -16,10 +16,10 @@ QuadNode::QuadNode(Point val) {
 }
 
 QuadNode::~QuadNode() {
-    delete superiorLeftChild;
-    delete superiorRightChild;
-    delete inferiorLeftChild;
-    delete inferiorRightChild;
+    if (nullptr != superiorLeftChild) delete superiorLeftChild;
+    if (nullptr != superiorRightChild) delete superiorRightChild;
+    if (nullptr != inferiorLeftChild) delete inferiorLeftChild;
+    if (nullptr != inferiorRightChild) delete inferiorRightChild;
 }
 
 Point QuadNode::getData() {

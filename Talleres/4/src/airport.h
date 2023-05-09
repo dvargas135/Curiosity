@@ -21,7 +21,6 @@ private:
     double m_longitude;
 };
 
-// Define a hash function for Airport objects to be used in unordered_map
 class AirportHasher {
 public:
     std::size_t operator()(const Airport& airport) const {
@@ -29,7 +28,6 @@ public:
     }
 };
 
-// Define equality operator for Airport objects to be used in unordered_map
 class AirportEqual {
 public:
     bool operator()(const Airport& lhs, const Airport& rhs) const {
@@ -37,4 +35,4 @@ public:
     }
 };
 
-#endif // AIRPORT_H
+#endif

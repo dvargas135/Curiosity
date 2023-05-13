@@ -43,7 +43,7 @@ GraphAdjacencyListPrice::GraphAdjacencyListPrice(std::vector<Flight*> flights, s
 
 GraphAdjacencyListPrice::~GraphAdjacencyListPrice() {
     for (int k = 0; k < number_of_nodes; k++) {
-        delete head_node[k];
+        delete[] head_node[k]
     }
     delete[] head_node;
 }
@@ -75,10 +75,9 @@ std::vector<Airport*> GraphAdjacencyListPrice::cheapestPath(const std::string& s
 
     int source_index = source_result.second;
     int dest_index = dest_result.second;
-
     const double INF = std::numeric_limits<double>::max();
 
-    // dijkstra's
+    // dijkstra's for cheapest route
     std::vector<double> cost(number_of_nodes, INF);
     std::vector<bool> visited(number_of_nodes, false);
     std::vector<int> previous(number_of_nodes, -1);
@@ -124,5 +123,6 @@ std::vector<Airport*> GraphAdjacencyListPrice::cheapestPath(const std::string& s
         cheapest.insert(cheapest.begin(), airports[current]);
         current = previous[current];
     }
+
     return cheapest;
 }

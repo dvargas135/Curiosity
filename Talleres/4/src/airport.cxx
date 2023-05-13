@@ -1,26 +1,20 @@
-#include "airport.h"
+#include "Airport.hpp"
 
-Airport::Airport(const std::string& city, const std::string& code, double lat, double lon)
-    : m_city(city), m_code(code), m_latitude(lat), m_longitude(lon)
-{
+Airport::Airport() = default;
+
+Airport::Airport(const std::string& name, const std::string& code, double latitude, double longitude)
+    : name(name), code(code), latitude(latitude), longitude(longitude) {}
+
+bool Airport::operator==(const Airport& other) const {
+    return code == other.code;
 }
 
-std::string Airport::getCity() const
-{
-    return m_city;
+bool Airport::operator!=(const Airport& other) const {
+    return code != other.code;
 }
 
-std::string Airport::getCode() const
-{
-    return m_code;
+bool Airport::operator<(const Airport& other) const {
+    return code < other.code;
 }
 
-double Airport::getLatitude() const
-{
-    return m_latitude;
-}
-
-double Airport::getLongitude() const
-{
-    return m_longitude;
-}
+Airport::~Airport() {}

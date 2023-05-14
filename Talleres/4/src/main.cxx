@@ -2,9 +2,6 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
-#include "GraphAdjacencyListPrice.hpp"
-#include "GraphAdjacencyListTime.hpp"
-#include "GraphAdjacencyListDistance.hpp"
 #include "GraphAdjacencyList.hpp"
 #include "Util.hpp"
 

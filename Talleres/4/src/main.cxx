@@ -5,6 +5,7 @@
 #include "GraphAdjacencyListPrice.hpp"
 #include "GraphAdjacencyListTime.hpp"
 #include "GraphAdjacencyListDistance.hpp"
+#include "GraphAdjacencyList.hpp"
 #include "Util.hpp"
 
 int main() {
@@ -25,9 +26,17 @@ int main() {
         return 0;
     }
 
-    GraphAdjacencyListTime gTime(flights, airports);
-    GraphAdjacencyListPrice gPrice(flights, airports);
-    GraphAdjacencyListDistance gDist(flights, airports);
+    const std::string& fastest = "fastest";
+    const std::string& cheapest = "cheapest";
+    const std::string& shortest = "shortest";
+
+    GraphAdjacencyList<std::string> gTime(flights, airports, fastest);
+    GraphAdjacencyList<std::string> gPrice(flights, airports, cheapest);
+    GraphAdjacencyList<std::string> gDist(flights, airports, shortest);
+
+    // GraphAdjacencyListTime gTime(flights, airports);
+    // GraphAdjacencyListPrice gPrice(flights, airports);
+    // GraphAdjacencyListDistance gDist(flights, airports);
     // graph.print();
 
     std::string line;
@@ -54,15 +63,15 @@ int main() {
         }
 
         if (col1 == "camino_rapido") {
-            std::vector<Airport*> fastest = gTime.fastestPath(col2, col3);
+            std::vector<Airport*> fastest = gTime.dijkstra(col2, col3);
             printf("%s :: ", line.c_str());
             nate(fastest);
         } else if (col1 == "camino_barato") {
-            std::vector<Airport*> cheapest = gPrice.cheapestPath(col2, col3);
+            std::vector<Airport*> cheapest = gPrice.dijkstra(col2, col3);
             printf("%s :: ", line.c_str());
             nate(cheapest);
         } else if (col1 == "ruta_corta") {
-            std::vector<Airport*> shortest = gDist.shortestPath(col2, col3);
+            std::vector<Airport*> shortest = gDist.dijkstra(col2, col3);
             printf("%s :: ", line.c_str());
             nate(shortest);
         }    

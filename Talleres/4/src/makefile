@@ -1,6 +1,6 @@
-OBJS   = main.o airport.o edge.o flight.o graphadjacencylistprice.o node.o util.o graphadjacencylisttime.o graphadjacencylistdistance.o
-SOURCE = main.cxx Airport.cxx Edge.cxx Flight.cxx GraphAdjacencyListPrice.cxx Node.cxx Util.cxx GraphAdjacencyListTime.cxx GraphAdjacencyListDistance.cxx
-HEADER = Airport.hpp Csv.hpp Edge.hpp Flight.hpp GraphAdjacencyListPrice.hpp Node.hpp Util.hpp GraphAdjacencyListTime.hpp GraphAdjacencyListDistance.hpp
+OBJS   = main.o airport.o edge.o flight.o graphadjacencylistprice.o node.o util.o graphadjacencylisttime.o graphadjacencylistdistance.o graphadjacencylist.o
+SOURCE = main.cxx Airport.cxx Edge.cxx Flight.cxx GraphAdjacencyListPrice.cxx Node.cxx Util.cxx GraphAdjacencyListTime.cxx GraphAdjacencyListDistance.cxx GraphAdjacencyList.cxx
+HEADER = Airport.hpp Csv.hpp Edge.hpp Flight.hpp GraphAdjacencyListPrice.hpp Node.hpp Util.hpp GraphAdjacencyListTime.hpp GraphAdjacencyListDistance.hpp GraphAdjacencyList.hpp
 OUT = main
 CC = g++
 FLAGS = -std=c++11 -g -c -Wall
@@ -34,6 +34,9 @@ graphadjacencylisttime.o: GraphAdjacencyListTime.cxx
 
 graphadjacencylistdistance.o: GraphAdjacencyListDistance.cxx
 	$(CC) $(FLAGS) GraphAdjacencyListDistance.cxx -o GraphAdjacencyListDistance.o
+
+graphadjacencylist.o: GraphAdjacencyList.cxx
+	$(CC) $(FLAGS) GraphAdjacencyList.cxx -o GraphAdjacencyList.o
 	
 
 clean:

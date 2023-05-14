@@ -48,6 +48,7 @@ std::unordered_map<int, Airport*> read_airports() {
 
         //delete airport object in the map reminder
     }
+    file.close();
     return airports;
 }
 
@@ -94,5 +95,29 @@ std::vector<Flight*> read_flights(std::unordered_map<int, Airport*>& airports) {
 
         // delete new_flight reminder
     }
+    file.close();
     return flights;
+}
+
+void nate(std::vector<Airport*> v) {
+    for (int i = 0; i  < v.size(); i++) {
+        std::cout << v[i]->code;
+        if (i != v.size() - 1) {
+            std::cout << " -> ";
+        }
+    }
+    std::cout << std::endl;
+}
+
+bool file_exists(const std::string& name) {
+    if (FILE *file = fopen(name.c_str(), "r")) {
+        fclose(file);
+        return true;
+    } else {
+        return false;
+    }   
+}
+
+bool file_is_empty(std::ifstream& pFile) {
+    return pFile.peek() == std::ifstream::traits_type::eof();
 }

@@ -1,21 +1,21 @@
-#include "GraphAdjacencyListPrice.hpp"
+#include "GraphAdjacencyListTime.hpp"
 
 #include <iostream>
 #include <limits>
 #include <queue>
 #include "Util.hpp"
 
-Node<Airport>* GraphAdjacencyListPrice::getAdjListNode(Edge<Flight> destination, Node<Airport>* head_node) {
+Node<Airport>* GraphAdjacencyListTime::getAdjListNode(Edge<Flight> destination, Node<Airport>* head_node) {
     Node<Airport>* new_node = new Node<Airport>;
 
-    new_node->cost = destination.data->price;
+    new_node->cost = destination.data->avg_time;
     new_node->data = destination.data->dest;
     new_node->next = head_node;
 
     return new_node;
 }
 
-GraphAdjacencyListPrice::GraphAdjacencyListPrice(std::vector<Flight*> flights, std::unordered_map<int, Airport*> airports) {
+GraphAdjacencyListTime::GraphAdjacencyListTime(std::vector<Flight*> flights, std::unordered_map<int, Airport*> airports) {
     this->airports = airports;
     this->number_of_nodes = airports.size();
     int num_edges = flights.size();
@@ -24,6 +24,7 @@ GraphAdjacencyListPrice::GraphAdjacencyListPrice(std::vector<Flight*> flights, s
     for (int i = 0; i < number_of_nodes; i++) {
         head_node[i] = nullptr;
     }
+    
     for (int k = 0; k < num_edges; k++) {
         Flight* flight = flights[k];
 
@@ -41,14 +42,14 @@ GraphAdjacencyListPrice::GraphAdjacencyListPrice(std::vector<Flight*> flights, s
     }
 }
 
-GraphAdjacencyListPrice::~GraphAdjacencyListPrice() {
+GraphAdjacencyListTime::~GraphAdjacencyListTime() {
     for (int k = 0; k < number_of_nodes; k++) {
         delete[] head_node[k];
     }
     delete[] head_node;
 }
 
-void GraphAdjacencyListPrice::print() {
+void GraphAdjacencyListTime::print() {
     for (int i = 0; i < number_of_nodes; i++) {
             if (head_node[i] == nullptr) {
             continue;
@@ -63,21 +64,21 @@ void GraphAdjacencyListPrice::print() {
     }
 }
 
-std::vector<Airport*> GraphAdjacencyListPrice::cheapestPath(const std::string& source_airport_code, const std::string& destination_airport_code) {
-    std::vector<Airport*> cheapest;
+std::vector<Airport*> GraphAdjacencyListTime::fastestPath(const std::string& source_airport_code, const std::string& destination_airport_code) {
+    std::vector<Airport*> fastest;
 
     auto source_result = searchAirportByCode(this->airports, source_airport_code);
     auto dest_result = searchAirportByCode(this->airports, destination_airport_code);
 
     if (source_result.second == -1 || dest_result.second == -1) {
-        return cheapest;
+        return fastest;
     }
 
     int source_index = source_result.second;
     int dest_index = dest_result.second;
     const double INF = std::numeric_limits<double>::max();
 
-    // dijkstra's for cheapest route
+    // dijkstra's for fastest route
     std::vector<double> cost(number_of_nodes, INF);
     std::vector<bool> visited(number_of_nodes, false);
     std::vector<int> previous(number_of_nodes, -1);
@@ -115,14 +116,14 @@ std::vector<Airport*> GraphAdjacencyListPrice::cheapestPath(const std::string& s
     }
 
     if (previous[dest_index] == -1) {
-        return cheapest;
+        return fastest;
     }
 
     int current = dest_index;
     while (current != -1) {
-        cheapest.insert(cheapest.begin(), airports[current]);
+        fastest.insert(fastest.begin(), airports[current]);
         current = previous[current];
     }
 
-    return cheapest;
+    return fastest;
 }

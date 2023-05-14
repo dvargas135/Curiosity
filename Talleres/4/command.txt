@@ -1,0 +1,5 @@
+camino_rapido TUS DEN
+camino_barato DCA GSO
+ruta_corta IAD BOS
+camino_rapido AAA BBB
+cam_rapido IAD BOS

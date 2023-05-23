@@ -7,6 +7,8 @@
 class Element {
     public:
         Element(const std::string&, double, std::string&, const Vector&);
+        Element();
+        ~Element();
         std::string getType() const;
         double getSize() const;
         std::string getMeasurementUnit() const;

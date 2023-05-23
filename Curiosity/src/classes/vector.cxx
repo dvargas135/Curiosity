@@ -6,6 +6,9 @@ Vector::Vector(double x, double y) : x(x), y(y) {}
 
 double Vector::getX() const { return x; }
 double Vector::getY() const { return y; }
+std::string Vector::getPos() {
+    return "(" + std::to_string(x) + ", " + std::to_string(y) + ")";
+}
 void Vector::setX(double x) { this->x = x; }
 void Vector::setY(double y) { this->y = y; }
 
@@ -19,6 +22,7 @@ void Vector::normalize() {
         y /= mag;
     }
 }
+
 double Vector::dotProduct(const Vector& other) const {
     return x*other.getX() + y*other.getY();
 }

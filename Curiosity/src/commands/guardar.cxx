@@ -45,7 +45,12 @@ void guardar(std::string type, std::string filename, System& sys) {
         }
         
         std::ofstream outfile(filepath);
-        std::queue<Element> element_list = sys.getElements();
+        std::vector<Element> element_vec = sys.getElements();
+        std::queue<Element> element_list;
+
+        for (const auto& element : element_vec) {
+            element_list.push(element);
+        }
 
         if (element_list.empty()) { printf("%s\n", errorMsg.c_str()); }
 

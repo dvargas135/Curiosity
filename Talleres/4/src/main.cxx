@@ -28,6 +28,7 @@ int main() {
     const std::string& shortest = "shortest";
 
     GraphAdjacencyList<std::string> gTime(flights, airports, fastest);
+    gTime.print();
     GraphAdjacencyList<std::string> gPrice(flights, airports, cheapest);
     GraphAdjacencyList<std::string> gDist(flights, airports, shortest);
 

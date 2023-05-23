@@ -12,15 +12,18 @@ void System::clearCommands() {
     this->cmd_list = {};
 }
 
-void System::addElement(Element& c) {
-    this->elmt_list.push(c);
+void System::addElement(Element e) {
+    this->elmt_list.push_back(e);
 }
 
-std::queue<Element> System::getElements() const {
+std::vector<Element> System::getElements() const {
     return elmt_list;
 }
 
 void System::clearElements() {
+    // for (auto e : elmt_list) {
+    //     delete e;
+    // }
     this->elmt_list = {};
 }
 
@@ -34,4 +37,12 @@ void System::setTree(QuadTree& tree) {
 
 void System::setTreeRoot(QuadNode* treeroot) {
     this->tree.setRoot(treeroot);
+}
+
+Graph System::getGraph() const {
+    return graph;
+}
+
+void System::setGraph(Graph& graph) {
+    this->graph = graph;
 }

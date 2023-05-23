@@ -1,6 +1,6 @@
-OBJS   = obj/main.o obj/command.o obj/curiosity.o obj/element.o obj/system.o obj/vector.o obj/agregar.o obj/ayuda.o obj/cargar.o obj/guardar.o obj/simular_comandos.o obj/ubicar_elementos.o obj/util.o obj/point.o obj/quadnode.o obj/quadtree.o obj/en_cuadrante.o
-SOURCE = main.cxx classes/command.cxx classes/curiosity.cxx classes/element.cxx classes/system.cxx classes/vector.cxx commands/agregar.cxx commands/ayuda.cxx commands/cargar.cxx commands/guardar.cxx commands/simular_comandos.cxx commands/ubicar_elementos.cxx util/util.cxx trees/quad/point.cxx trees/quad/quadnode.cxx trees/quad/quadtree.cxx commands/en_cuadrante.cxx
-HEADER = classes/command.hpp classes/curiosity.hpp classes/element.hpp classes/system.hpp classes/vector.hpp commands/agregar.hpp commands/ayuda.hpp commands/cargar.hpp commands/guardar.hpp commands/simular_comandos.hpp commands/ubicar_elementos.hpp util/util.hpp trees/quad/point.hpp trees/quad/quadnode.hpp trees/quad/quadtree.hpp commands/en_cuadrante.hpp
+OBJS   = obj/main.o obj/command.o obj/curiosity.o obj/element.o obj/system.o obj/vector.o obj/agregar.o obj/ayuda.o obj/cargar.o obj/guardar.o obj/simular_comandos.o obj/ubicar_elementos.o obj/util.o obj/point.o obj/quadnode.o obj/quadtree.o obj/en_cuadrante.o obj/Edge.o obj/Graph.o obj/Node.o obj/crear_mapa.o
+SOURCE = main.cxx classes/command.cxx classes/curiosity.cxx classes/element.cxx classes/system.cxx classes/vector.cxx commands/agregar.cxx commands/ayuda.cxx commands/cargar.cxx commands/guardar.cxx commands/simular_comandos.cxx commands/ubicar_elementos.cxx util/util.cxx trees/quad/point.cxx trees/quad/quadnode.cxx trees/quad/quadtree.cxx commands/en_cuadrante.cxx graph/Edge.cxx graph/Graph.cxx graph/Node.cxx commands/crear_mapa.cxx
+HEADER = classes/command.hpp classes/curiosity.hpp classes/element.hpp classes/system.hpp classes/vector.hpp commands/agregar.hpp commands/ayuda.hpp commands/cargar.hpp commands/guardar.hpp commands/simular_comandos.hpp commands/ubicar_elementos.hpp util/util.hpp trees/quad/point.hpp trees/quad/quadnode.hpp trees/quad/quadtree.hpp commands/en_cuadrante.hpp graph/Edge.hpp graph/Graph.hpp graph/Node.hpp commands/crear_mapa.cxx
 OUT = main
 CC = g++
 FLAGS = -std=c++11 -g -c -Wall
@@ -47,7 +47,7 @@ obj/ubicar_elementos.o: commands/ubicar_elementos.cxx
 obj/util.o: util/util.cxx
 	$(CC) $(FLAGS) util/util.cxx -o obj/util.o
 
-#new classes added for component ii
+# new classes added for component ii
 obj/point.o: trees/quad/point.cxx
 	$(CC) $(FLAGS) trees/quad/point.cxx -o obj/point.o
 
@@ -59,6 +59,19 @@ obj/quadtree.o: trees/quad/quadtree.cxx
 
 obj/en_cuadrante.o: commands/en_cuadrante.cxx
 	$(CC) $(FLAGS) commands/en_cuadrante.cxx -o obj/en_cuadrante.o
+
+# component iii
+obj/Edge.o: graph/Edge.cxx
+	$(CC) $(FLAGS) graph/Edge.cxx -o obj/Edge.o
+
+obj/Graph.o: graph/Graph.cxx
+	$(CC) $(FLAGS) graph/Graph.cxx -o obj/Graph.o
+
+obj/Node.o: graph/Node.cxx
+	$(CC) $(FLAGS) graph/Node.cxx -o obj/Node.o
+
+obj/crear_mapa.o: commands/crear_mapa.cxx
+	$(CC) $(FLAGS) commands/crear_mapa.cxx -o obj/crear_mapa.o
 
 clean:
 ifeq ($(OS), Windows_NT)

@@ -64,6 +64,7 @@ void agregar_elemento(std::string type, std::string size_str, std::string measur
     Vector position(x, y);
     Element e(type, size, measurement_unit, position);
     sys.addElement(e);
+    // delete e;
 
     printf("El elemento ha sido agregado exitosamente.\n");
 }

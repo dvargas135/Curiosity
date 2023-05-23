@@ -8,6 +8,6 @@
 
 // std::vector<Point> en_cuadrante(std::string, std::string, std::string, std::string, System&);
 void en_cuadrante(std::string, std::string, std::string, std::string, System&);
-void comparePoints(std::queue<Element>, const std::vector<Point>&);
+void comparePoints(std::vector<Element>, const std::vector<Point>&, System&);
 
 #endif

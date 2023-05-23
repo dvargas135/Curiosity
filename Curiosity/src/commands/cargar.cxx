@@ -113,6 +113,7 @@ void cargar_elementos(std::string filename, System& sys) {
         Vector p(x, y);
         Element e(col1, size, col3, p);
         sys.addElement(e);
+        // delete e;
         printf("Elemento `%s %s %s %s %s` cargado exitosamente.\n", col1.c_str(), col2.c_str(), col3.c_str(), col4.c_str(), col5.c_str());
     }
     infile.close();

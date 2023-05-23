@@ -3,7 +3,6 @@
 
 #include <algorithm>
 #include <cmath>
-// #include <iomanip>
 #include <iostream>
 #include <limits>
 #include <type_traits>
@@ -44,20 +43,17 @@ GraphAdjacencyList<T>::GraphAdjacencyList(std::vector<Flight*> flights, std::uno
 
         double weight = 0;
 
-        // if (std::is_same<T, std::string>) {
-            if (type == "shortest") {
-                weight = calcDistance(src->latitude, src->longitude, dst->latitude, dst->longitude);
-            } else if (type == "fastest") {
-                destination.data->avg_time;
-            } else if (type == "cheapest") {
-                weight = destination.data->price;
-            }
-        // }
+        if (type == "shortest") {
+            weight = calcDistance(src->latitude, src->longitude, dst->latitude, dst->longitude);
+        } else if (type == "fastest") {
+            destination.data->avg_time;
+        } else if (type == "cheapest") {
+            weight = destination.data->price;
+        }
 
         int source_index = -1;
         auto ddd = searchAirportByCode(airports, src->code);
         source_index = ddd.second;
-        // std::cout << std::setprecision(10) << src->latitude << ", " << src->longitude << ". " << dst->latitude << ", " << dst->longitude<< " -- " << distance << std::endl;
 
         Node<Airport>* new_node = getAdjListNode(destination, weight, head_node[source_index]);
         head_node[source_index] = new_node;
@@ -150,6 +146,7 @@ std::vector<Airport*> GraphAdjacencyList<T>::dijkstra(const std::string& source_
     }
 
     int current = dest_index;
+    
     while (current != -1) {
         shortest.insert(shortest.begin(), airports[current]);
         current = previous[current];

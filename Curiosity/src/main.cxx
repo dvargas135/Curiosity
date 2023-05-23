@@ -15,6 +15,7 @@
 #include "./commands/simular_comandos.hpp"
 #include "./commands/ubicar_elementos.hpp"
 #include "./commands/en_cuadrante.hpp"
+#include "./commands/crear_mapa.hpp"
 
 int main() {
     System sys;
@@ -129,11 +130,10 @@ int main() {
                 break;
             case 11:
                 if (args != 1) {
-                    //ayuda(cmd_map, *(it+0));
-                    
+                    ayuda(cmd_map, *(it+0));
                     break;
                 }
-                //crear_mapa(*(it+1));
+                crear_mapa(*(it+1), sys);
                 break;
             case 12:
                 if (args != 0) {

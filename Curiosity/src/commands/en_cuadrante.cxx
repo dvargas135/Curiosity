@@ -30,7 +30,7 @@ void en_cuadrante(std::string x1_str, std::string x2_str, std::string y1_str, st
 
     printf("Los elementos ubicados en el cuadrante solicitado son:\n");
 
-    comparePoints(s.getElements(), puntos);
+    comparePoints(s.getElements(), puntos, s);
     
     // for (auto a : puntos) {
     //     printf(" %f, %f\n", a.getX(), a.getY());
@@ -39,7 +39,13 @@ void en_cuadrante(std::string x1_str, std::string x2_str, std::string y1_str, st
     // return puntos;
 }
 
-void comparePoints(std::queue<Element> elements, const std::vector<Point>& points) {
+void comparePoints(std::vector<Element> elements_vec, const std::vector<Point>& points, System& s) {
+    std::queue<Element> elements;
+
+    for (const auto& element : elements_vec) {
+        elements.push(element);
+    }
+    
     while (!elements.empty()) {
         Element e = elements.front();
         elements.pop();

@@ -1,7 +1,7 @@
-#ifndef ELEMENT_HPP
-#define ELEMENT_HPP
+#pragma once
 
 #include "vector.hpp"
+
 #include <string>
 
 class Element {
@@ -14,11 +14,10 @@ class Element {
         std::string getMeasurementUnit() const;
         Vector getPosition() const;
         void setPosition(const Vector&);
+        
     private:
         std::string type;
         double size;
         std::string measurement_unit;
         Vector position;
 };
-
-#endif

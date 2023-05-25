@@ -15,6 +15,7 @@ class Vector {
         double magnitude() const;
         void normalize();
         double dotProduct(const Vector& other) const;
+        
     private:
         double x;
         double y;

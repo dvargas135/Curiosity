@@ -1,83 +1,85 @@
 #include "Graph.hpp"
+#include "Edge.hpp"
 
+#include <functional>
+#include <iostream>
 #include <algorithm>
 #include <cmath>
-#include <iostream>
-#include <limits>
-#include <type_traits>
-#include <unordered_set>
-#include <queue>
-#include "../util/util.hpp"
-
-Node<Element>* Graph::getAdjListNode(Edge<Element> destination, double cost, Node<Element>* head_node) {
-    Node<Element>* new_node = new Node<Element>;
-	
-    new_node->cost = cost;
-    new_node->data = destination.data;
-    new_node->next = head_node;
-	
-    return new_node;
-}
 
 Graph::Graph() {}
 
-Graph::Graph(std::vector<Element> elements, int threshold) {
-    head_node = new Node<Element>*[elements.size()]();
-    this->number_of_nodes = elements.size();
-    this->elements = elements;
-
-    for (int i = 0; i < number_of_nodes; i++) {
-        head_node[i] = nullptr;
+Graph::Graph(std::vector<Element> elements, double connectivityCoefficient) {
+    isInitialized = true;
+    std::vector<Node*> nodePointers;
+    
+    for (Element& element : elements) {
+        Node* node = addNode(element);
+        nodePointers.push_back(node);
     }
-
-    int edCount = 0;
-    int num_nodes = elements.size();
-
-    for (int i = 0; i < num_nodes; ++i) {
-        Element node1 = elements[i]; // source
-
-        for (int j = i + 1; j < num_nodes; ++j) {
-            Element node2 = elements[j]; // destination
-            
-            double distance = std::sqrt(std::pow(node2.getPosition().getX() - node1.getPosition().getX(), 2) + std::pow(node2.getPosition().getY() - node1.getPosition().getY(), 2));
-
-            if (distance <= threshold) {
-                std::cout << node1.getPosition().getPos() << " - " << node2.getPosition().getPos() << ", " << distance << std::endl;
-
-                Edge<Element> destination;
-                destination.data = node2;
-
-                Node<Element> *new_node = getAdjListNode(destination, distance, head_node[i]);
-                head_node[i] = new_node;
-				
-                edCount++;
-            }
+    
+    std::size_t numNeighbors = static_cast<std::size_t>(elements.size() * connectivityCoefficient);
+    
+    for (Node* currentNode : nodePointers) {
+        std::vector<std::pair<double, Node*>> distances;
+        
+        for (Node* otherNode : nodePointers) {
+            if (currentNode == otherNode) continue;
+            double distance = calculateDistance(currentNode->element.getPosition(), otherNode->element.getPosition());
+            distances.emplace_back(distance, otherNode);
+        }
+        
+        std::sort(distances.begin(), distances.end());
+        
+        for (std::size_t i = 0; i < numNeighbors && i < distances.size(); ++i) {
+            double distance = distances[i].first;
+            Node* neighborNode = distances[i].second;
+            currentNode->addNeighbor(neighborNode, distance);
         }
     }
-    this->edgeCount = edCount;
 }
 
 Graph::~Graph() {
-    for (int k = 0; k < number_of_nodes; k++) {
-        head_node[k] = nullptr;
+    if (!nodes.empty()) {
+        for (Node* node : nodes) {
+            if (node != nullptr) {
+                delete node;
+            }
+        }
     }
-    delete[] head_node;
+}
+
+Node* Graph::addNode(const Element& element) {
+    Node* newNode = new Node(element);
+    nodes.push_back(newNode);
+    typeNodeMap[element.getType()].push_back(newNode);
+    return newNode;
+}
+
+std::vector<Node*> Graph::getNodesByType(const std::string& type) const {
+    auto it = typeNodeMap.find(type);
+    return (it != typeNodeMap.end()) ? it->second : std::vector<Node*>();
+}
+
+double Graph::calculateDistance(const Vector& v1, const Vector& v2) {
+    double dx = v1.getX() - v2.getX();
+    double dy = v1.getY() - v2.getY();
+    return std::sqrt(dx * dx + dy * dy);
 }
 
 void Graph::print() {
-    for (int i = 0; i < number_of_nodes; i++) {
-        if (head_node[i] == nullptr) {
-            continue;
-        }
-
-        Node<Element>* curr = head_node[i];
-        std::cout << i << ". " << curr->data.getPosition().getPos() << " ";
-
-        while (curr) {
-            std::cout << "-> (" << curr->data.getPosition().getPos() << ", " << curr->cost << ")";
-            curr = curr->next;
+    for (Node* node : nodes) {
+        std::cout << "Elemento: [" << node->element.getType() << ", " << node->element.getSize() << node->element.getMeasurementUnit() << ", (" << node->element.getPosition().getX() << ", " << node->element.getPosition().getY() << ")]" << std::endl;
+        
+        std::cout << "Vecinos: " << std::endl;
+        for (const Edge& edge : node->neighbors) {
+            std::cout << "- [" << edge.destination->element.getType() << ", " << edge.destination->element.getSize() << edge.destination->element.getMeasurementUnit() << ", (" << edge.destination->element.getPosition().getX() << ", " << edge.destination->element.getPosition().getY() << ")]. ";
+            std::cout << "Distancia: " << edge.weight << std::endl;
         }
         
         std::cout << std::endl;
     }
+}
+
+bool Graph::isEmpty() const {
+    return !isInitialized;
 }

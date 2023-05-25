@@ -1,33 +1,26 @@
-#ifndef GRAPH_HPP
-#define GRAPH_HPP
+#pragma once
 
-#include <unordered_map>
 #include <vector>
-#include "Edge.hpp"
-#include "Node.hpp"
+#include <unordered_map>
+#include <unordered_set>
+
 #include "../classes/element.hpp"
+#include "../classes/vector.hpp"
+#include "Node.hpp"
 
 class Graph {
-    Node<Element>* getAdjListNode(Edge<Element>, double, Node<Element>*);
-    int number_of_nodes;
-    int edgeCount;
-	
 public:
-    Node<Element>** head_node;
-    // std::unordered_map<int, Airport*> airports;
-    std::vector<Element> elements;
-
-    // int calculate_edges(const std::vector<Element*>&, double);
-    // int calculate_edges(double);
-	
-    // Graph(std::vector<Flight*>, std::unordered_map<int, Airport*>, const T&);
+    std::vector<Node*> nodes;
+    std::unordered_map<std::string, std::vector<Node*>> typeNodeMap;
+    bool isInitialized = false;
+    
     Graph();
-    Graph(std::vector<Element>, int);
+    Graph(std::vector<Element>, double);
     ~Graph();
-
+    
+    Node* addNode(const Element& element);
+    std::vector<Node*> getNodesByType(const std::string& type) const;
+    double calculateDistance(const Vector&, const Vector&);
     void print();
-    double calcDistance(double, double, double, double);
-    // std::vector<Airport*> dijkstra(const std::string&, const std::string&);
+    bool isEmpty() const;
 };
-
-#endif

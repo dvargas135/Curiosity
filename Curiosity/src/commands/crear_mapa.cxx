@@ -1,14 +1,35 @@
 #include "crear_mapa.hpp"
 #include "../graph/Graph.hpp"
+#include "../util/util.hpp"
+
 #include <cstdio>
+#include <iostream>
+#include <algorithm>
+#include <cmath>
+#include <functional>
+#include <unordered_set>
+#include <stack>
 
-void crear_mapa(std::string threshold_str, System& sys) {
-    int threshold = std::stod(threshold_str);
-    Graph graph(sys.getElements(), threshold);
-    std::cout<<"ddd"<<std::endl;
-    graph.print();
+void crear_mapa(std::string cc_str, System& sys) {
+    if (sys.getElements().empty()) {
+        std::cout << "La informacion requerida no esta almacenada en memoria." << std::endl;
+        return;
+    }
 
-    // sys.clearElements();
+    if (!is_positive(cc_str)) {
+        printf("El coeficiente de conectividad no es un número natural.\n");
+        return;
+    }
+
+    double cc = std::stod(cc_str);
+    std::vector<Element> ets = sys.getElements();
     
-    // graph.calculate_edges(threshold);
+    Graph* graph = new Graph(sys.getElements(), cc);
+    sys.setGraph(graph);
+    printf("Mapa creado exitosamente. Escriba `ver_mapa` para imprimirlo.\n");
+}
+
+void ver_mapa(System& sys) {
+    Graph* g = sys.getGraph();
+    g->print();
 }

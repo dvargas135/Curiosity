@@ -1,14 +1,10 @@
 #pragma once
-#include "Node.hpp"
 
-template<typename T>
+class Node;
+
 class Edge {
 public:
-    // Node<T>* data;
-    T data;
-    Edge();
-    Edge(T);
-    ~Edge();
+    Node* destination;
+    double weight;
+    Edge(Node* dest, double w);
 };
-
-#include "Edge.cxx"

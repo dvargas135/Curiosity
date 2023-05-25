@@ -10,6 +10,7 @@ class Curiosity {
         void turn(double degrees);
         std::string getLocation() const;
         void moveTo(double x, double y);
+        
     private:
         double x_;
         double y_;

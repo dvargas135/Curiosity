@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <ctype.h>
 #include <stdio.h>
+#include <sstream>
 
 bool is_positive(const std::string& s) {
     return !s.empty() && std::find_if(
@@ -38,4 +39,12 @@ bool file_is_empty(std::ifstream& pFile) {
 
 Point vectorToPoint(const Vector& v) {
     return Point{v.getX(), v.getY()};
+}
+
+bool isDouble(const std::string& input) {
+    std::istringstream iss(input);
+    double value;
+    iss >> std::noskipws >> value;
+    
+    return iss.eof() && !iss.fail();
 }

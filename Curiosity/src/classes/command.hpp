@@ -19,6 +19,7 @@ class Command {
         std::string getAnalysisType() const;
         std::string getObject() const;
         std::string getComment() const;
+        
     private:
         std::string type;
 };
@@ -29,6 +30,7 @@ class Movement : public Command {
         std::string getMovementType() const;
         double getMagnitude() const;
         std::string getMeasurementUnit() const;
+
     private:
         std::string movement_type;
         double magnitude;
@@ -41,6 +43,7 @@ class Analysis : public Command {
         std::string getAnalysisType() const;
         std::string getObject() const;
         std::string getComment() const;
+
     private:
         std::string analysis_type;
         std::string object;

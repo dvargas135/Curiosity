@@ -4,8 +4,7 @@
 #include <string>
 #include "../classes/system.hpp"
 
-// void cargar_comandos(std::string, System&);
-// void cargar_elementos(std::string, System&);
 void crear_mapa(std::string, System&);
+void ver_mapa(System&);
 
 #endif

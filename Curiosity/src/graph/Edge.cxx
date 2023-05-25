@@ -1,14 +1,4 @@
-#pragma once
 #include "Edge.hpp"
+#include "Node.hpp"
 
-template<typename T>
-Edge<T>::Edge(T data)
-    : data(data) {}
-
-template<typename T>
-Edge<T>::Edge() {}
-
-template<typename T>
-Edge<T>::~Edge() {
-    // delete data;
-}
+Edge::Edge(Node* dest, double w) : destination(dest), weight(w) {}

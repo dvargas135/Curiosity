@@ -1,15 +1,15 @@
 #pragma once
 
-template<typename T>
+#include <vector>
+
+#include "../classes/element.hpp"
+#include "Edge.hpp"
+
 class Node {
 public:
-    T data;
-    double cost;
-    Node<T>* next;
-
-    Node(T, double);
-    Node();
-    ~Node();
+    Element element;
+    std::vector<Edge> neighbors;
+    
+    Node(const Element& elem);
+    void addNeighbor(Node* neighbor, double weight);
 };
-
-#include "Node.cxx"

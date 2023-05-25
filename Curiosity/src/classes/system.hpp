@@ -6,10 +6,12 @@
 
 #include "command.hpp"
 #include "element.hpp"
+//#include "graph.hpp"
 #include <queue>
 
 class System {
     public:
+        ~System();
         void addCommand(Command*);
         std::queue<Command*> getCommands() const;
         void clearCommands();
@@ -22,13 +24,13 @@ class System {
         void setTree(QuadTree&);
         void setTreeRoot(QuadNode*);
 
-        Graph getGraph() const;
-        void setGraph(Graph&);
+        Graph* getGraph() const;
+        void setGraph(Graph*);
     private:
         std::queue<Command*> cmd_list;
         std::vector<Element> elmt_list;
         QuadTree tree;
-        Graph graph;
+        Graph* graph;
 };
 
 #endif

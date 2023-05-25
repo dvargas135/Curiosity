@@ -1,5 +1,11 @@
 #include "system.hpp"
 
+System::~System() {
+    // if (graph != nullptr) {
+    //     delete graph;
+    // }
+}
+
 void System::addCommand(Command* c) {
     this->cmd_list.push(c);
 }
@@ -21,9 +27,6 @@ std::vector<Element> System::getElements() const {
 }
 
 void System::clearElements() {
-    // for (auto e : elmt_list) {
-    //     delete e;
-    // }
     this->elmt_list = {};
 }
 
@@ -39,10 +42,10 @@ void System::setTreeRoot(QuadNode* treeroot) {
     this->tree.setRoot(treeroot);
 }
 
-Graph System::getGraph() const {
+Graph* System::getGraph() const {
     return graph;
 }
 
-void System::setGraph(Graph& graph) {
+void System::setGraph(Graph* graph) {
     this->graph = graph;
 }

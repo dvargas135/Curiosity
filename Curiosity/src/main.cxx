@@ -16,10 +16,10 @@
 #include "./commands/ubicar_elementos.hpp"
 #include "./commands/en_cuadrante.hpp"
 #include "./commands/crear_mapa.hpp"
+#include "./commands/ruta_mas_larga.hpp"
 
 int main() {
     System sys;
-    // bool entro=false;
     std::map<std::string, int> cmd_map {
         {"cargar_comandos", 1},
         {"cargar_elementos", 2},
@@ -34,6 +34,7 @@ int main() {
         {"crear_mapa", 11},
         {"ruta_mas_larga", 12},
         {"ayuda", 13},
+        {"ver_mapa", 14},
     };
     
     std::string cmd;
@@ -44,7 +45,8 @@ int main() {
 
         if (cmd.empty()) {
             printf("Comando no encontrado! Intente nuevamente.\n");
-            break;
+            // break;
+            continue;
         }
 
         std::stringstream sstream(cmd);
@@ -115,10 +117,10 @@ int main() {
                 printf("\n\nTerminando proceso...\n");
                 return 0;
             case 9:
-                // if (args != 0) {
-                //     ayuda(cmd_map, *(it+0));
-                //     break;
-                // }
+                if (args != 0) {
+                    ayuda(cmd_map, *(it+0));
+                    break;
+                }
                 ubicar_elementos(sys);
                 break;
             case 10:
@@ -140,7 +142,7 @@ int main() {
                     ayuda(cmd_map, *(it+0));
                     break;
                 }
-                //ruta_mas_larga();
+                ruta_mas_larga(sys);
                 break;
             case 13:
                 if (args != 1) {
@@ -148,6 +150,13 @@ int main() {
                     break;
                 }
                 ayuda(cmd_map, *(it+1));
+                break;
+            case 14:
+                if (args != 0) {
+                    ayuda(cmd_map, *(it+0));
+                    break;
+                }
+                ver_mapa(sys);
                 break;
             default:
                 printf("Comando no encontrado! Intente nuevamente.\n");
